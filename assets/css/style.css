@@ -244,10 +244,12 @@ h1, h2, h3, h4, h5, h6 {
   height: 100vh;
   
   /*background-size: cover;
-  background: url("../img/mattia.png") top right no-repeat;
-  position: relative;
+  
+ 
   */
   background-attachment: fixed;
+  background: url("../img/mattia.png") top right no-repeat;
+  position: auto;
 
   background-repeat: no-repeat;
   background-size: cover;
