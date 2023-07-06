@@ -247,7 +247,7 @@ h1, h2, h3, h4, h5, h6 {
   background-position: center;
   background-attachment: absolute;
   background-size: cover;
-  position: absolute;
+  position: relative;
 
 }
 @media (min-width: 992px) {
