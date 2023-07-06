@@ -242,7 +242,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   height: 100vh;
   background-attachment: fixed;
-  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,0,0,0) 100%), url("../img/mattia.png") top right no-repeat;
+  background: linear-gradient(0deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%), url("../img/mattia.png") top right no-repeat;
   background-repeat: no-repeat;
   background-size: cover;
   
