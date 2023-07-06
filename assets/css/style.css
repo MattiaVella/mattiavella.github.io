@@ -244,8 +244,8 @@ h1, h2, h3, h4, h5, h6 {
   /*background-size: cover;
   position: relative;
   */
-  background-size: cover;
-  position: relative;
+  background-size: auto;
+  position: absolute;
 
 }
 @media (min-width: 992px) {
