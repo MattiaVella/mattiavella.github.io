@@ -240,16 +240,23 @@ h1, h2, h3, h4, h5, h6 {
 # Hero Section
 --------------------------------------------------------------*/
 #hero {
+
   height: 100vh;
+  
+  /*background-size: cover;
+  
+  position: relative;
+  */
   background-attachment: fixed;
-  background: linear-gradient(0deg, rgba(255,255,255,1) 19%, rgba(0,0,0,0) 38%), url("../img/mattia.png") top right no-repeat;
+  
+
   background-repeat: no-repeat;
   background-size: cover;
-  
 }
 @media (min-width: 992px) {
   #hero {
     padding-left: 160px;
+    background: url("../img/mattia.png") top right no-repeat;
   }
 }
 #hero:before {
