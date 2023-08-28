@@ -243,6 +243,18 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+
+#myVideo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%; /* Utilizza "width" anziché "min-width" per adattarsi meglio */
+  height: 100%; /* Utilizza "height" anziché "min-height" per adattarsi meglio */
+  object-fit: cover; /* Ridimensiona il video per coprire l'intero contenitore mantenendo l'aspetto */
+  z-index: -1;
+}
+
+
 #hero {
 
   height: 100vh;
@@ -260,7 +272,9 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 992px) {
   #hero {
     padding-left: 160px;
-    background: url("../img/mattia.png") top right no-repeat;
+    /*background: url("../img/mattia.png") top right no-repeat;*/
+
+    
   }
 }
 #hero:before {
