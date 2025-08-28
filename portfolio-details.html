@@ -49,27 +49,25 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>About</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2 id="portfolio-about-title">About</h2>
+          <p id="portfolio-about-text"></p>
         </div>
 
         <div class="row">
           <div class="col-lg-4 col-md-6">
-            <!-- Aggiunto id per l'immagine principale -->
-            <img id="portfolio-main-image" src="https://source.unsplash.com/random/?product-render" class="img-fluid" alt="">
+            <img id="portfolio-main-image" src="" class="img-fluid" alt="">
             <div class="image-text">
-              <h2  style="text-align: right; font-size: 500%;  line-height: 1em">RENDER MOLTO BELLO</h2>
+              <h2 id="portfolio-title" style="text-align: right; font-size: 500%;  line-height: 1em"></h2>
             </div>
           </div>
           
           <div class="col-lg-8 pt-4 pt-lg-0 content">
-            
-            
-              <div  id="portfolio" class="portfolio section-bg" data-aos="fade-up">
-                <div class="row portfolio-container" id="portfolio-gallery" data-aos="fade-up" data-aos-delay="200">
-                  <!-- Le immagini verranno inserite qui tramite JS da portfolio.js -->
-                </div>
+            <div id="portfolio-description" style="margin-bottom: 2em; font-size: 1.1em; font-weight: 400; color: #444; line-height: 1.7; font-family: 'Open Sans', Arial, sans-serif;"></div>
+            <div  id="portfolio" class="portfolio section-bg" data-aos="fade-up">
+              <div class="row portfolio-container" id="portfolio-gallery" data-aos="fade-up" data-aos-delay="200">
+                <!-- Le immagini verranno inserite qui tramite JS da portfolio.js -->
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -98,6 +96,55 @@
   
   <!-- Includi portfolio.js -->
   <script src="assets/js/portfolio.js"></script>
+  <script>
+    // Script per rendere dinamico il testo About
+    (function() {
+      function getIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('id');
+      }
+      const id = getIdFromUrl();
+      if (!id || !window.portfolioImages) return;
+      const project = window.portfolioImages.find(p => String(p.id) === String(id));
+      if (!project) return;
+      // Testo About
+      const aboutTextEl = document.getElementById('portfolio-about-text');
+      if (aboutTextEl && project.about) aboutTextEl.textContent = project.about;
+    })();
+  </script>
+  <script>
+    // Script per rendere dinamici titolo, descrizione, immagine principale e sezione About
+    (function() {
+      function getIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('id');
+      }
+      const id = getIdFromUrl();
+      if (!id || !window.portfolioImages) return;
+      const project = window.portfolioImages.find(p => String(p.id) === String(id));
+      if (!project) return;
+      // Titolo
+      const titleEl = document.getElementById('portfolio-title');
+      if (titleEl) titleEl.textContent = project.title;
+      // Immagine principale
+      const mainImg = document.getElementById('portfolio-main-image');
+      if (mainImg) mainImg.src = project.src;
+      // Descrizione (usa subtitle come esempio, puoi aggiungere altri campi)
+      const descEl = document.getElementById('portfolio-description');
+      if (descEl) descEl.textContent = project.subtitle;
+  // About title
+  const aboutTitle = document.getElementById('portfolio-about-title');
+  if (aboutTitle && project.about) aboutTitle.textContent = project.about;
+  // About text
+  const aboutText = document.getElementById('portfolio-about-text');
+  if (aboutText && project.aboutText) aboutText.textContent = project.aboutText;
+  // Paragrafo dinamico
+  const dynamicParagraph = document.getElementById('portfolio-dynamic-paragraph');
+  if (dynamicParagraph && project.dynamicParagraph) dynamicParagraph.textContent = project.dynamicParagraph;
+  // Cambia anche il <title> della pagina
+  document.title = project.title + ' - Portfolio Details';
+    })();
+  </script>
 </body>
 
 </html>

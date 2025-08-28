@@ -4,12 +4,13 @@ const portfolioData = [
   {
     id: 1,
     type: 'filter-model',
+    about: "Testo personalizzato About per il progetto 1",
+    dynamicParagraph: "Questo è un paragrafo dinamico per il progetto 1. Puoi modificarlo da JS!",
     img: 'assets/img/img1.jpg',
     title: '3D Model Example',
     subtitle: 'Modellazione 3D',
     link: 'portfolio-details.html',
     isVideo: false,
-    // galleria aggiuntiva per il progetto id=1
     gallery: [
       'assets/img/img1-1.jpg',
       'assets/img/img1-2.jpg',
@@ -21,85 +22,14 @@ const portfolioData = [
     type: 'filter-archiviz',
     img: 'assets/img/img2.jpg',
     title: 'Archiviz Example',
-    subtitle: 'Visualizzazione Architettonica',
+    about: "Testo personalizzato About per il progetto 2",
+    dynamicParagraph: "Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!",
+    subtitle: 'Visualizzazione Architettonica Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modific Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modific Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modific',
     link: 'portfolio-details.html',
     isVideo: false,
     gallery: [
       'assets/img/img2-1.jpg',
       'assets/img/img2-2.jpg'
-    ]
-  },
-  {
-    id: 3,
-    type: 'filter-render',
-    img: 'assets/img/img3.jpg',
-    title: 'Render Example',
-    subtitle: 'Rendering di Prodotto',
-    link: 'portfolio-details.html',
-    isVideo: false,
-    gallery: [
-      'assets/img/img3-1.jpg',
-      'assets/img/img3-2.jpg'
-    ]
-  },
-  {
-    id: 4,
-    type: 'filter-animation',
-    img: 'assets/img/img4.jpg',
-    title: 'Animation Example',
-    subtitle: 'Animazione 3D',
-    link: 'portfolio-details-video.html',
-    isVideo: false,
-    gallery: [
-      'assets/img/img4-1.jpg'
-    ]
-  },
-  {
-    id: 5,
-    type: 'filter-model',
-    img: 'assets/img/img5.jpg',
-    title: '3D Model 2',
-    subtitle: 'Modello Organico',
-    link: 'portfolio-details.html',
-    isVideo: false,
-    gallery: [
-      'assets/img/img5-1.jpg'
-    ]
-  },
-  {
-    id: 6,
-    type: 'filter-archiviz',
-    img: 'assets/img/img6.jpg',
-    title: 'Archiviz 2',
-    subtitle: 'Interni Moderni',
-    link: 'portfolio-details.html',
-    isVideo: false,
-    gallery: [
-      'assets/img/img6-1.jpg'
-    ]
-  },
-  {
-    id: 7,
-    type: 'filter-render',
-    img: 'assets/img/img7.jpg',
-    title: 'Render 2',
-    subtitle: 'Render Esterno',
-    link: 'portfolio-details.html',
-    isVideo: false,
-    gallery: [
-      'assets/img/img7-1.jpg'
-    ]
-  },
-  {
-    id: 8,
-    type: 'filter-animation',
-    img: 'assets/img/img8.jpg',
-    title: 'Animation 2',
-    subtitle: 'Animazione Prodotto',
-    link: 'portfolio-details-video.html',
-    isVideo: false,
-    gallery: [
-      'assets/img/img8-1.jpg'
     ]
   }
 ];
@@ -110,9 +40,11 @@ window.portfolioImages = portfolioData.map(item => ({
   src: item.img,
   title: item.title,
   subtitle: item.subtitle,
+  about: item.about,
+  dynamicParagraph: item.dynamicParagraph,
   link: item.link,
   isVideo: item.isVideo,
-  gallery: (item.gallery || []).map(g => ({ src: g })) // array di oggetti {src: ...}
+  gallery: (item.gallery || []).map(g => ({ src: g }))
 }));
 
 /* --- Popola la index (se presente #portfolio-items) --- */
