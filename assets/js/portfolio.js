@@ -150,18 +150,14 @@ window.portfolioImages = portfolioData.map(item => ({
 
 /* --- Popola la pagina dei dettagli: immagine principale + galleria (se esiste #portfolio-gallery) --- */
 (function populateDetailsGalleryIfNeeded() {
-  const galleryContainer = document.getElementById('portfolio-gallery'); // usato nella tua pagina
-  const mainImageEl = document.getElementById('portfolio-main-image'); // opzionale: immagine principale
-  if (!galleryContainer && !mainImageEl) return; // non siamo sulla pagina dei dettagli
+  const galleryContainer = document.getElementById('portfolio-gallery');
+  const mainImageEl = document.getElementById('portfolio-main-image');
+  if (!galleryContainer && !mainImageEl) return;
 
-  // preleva id dalla query string: ?id=1
   const params = new URLSearchParams(window.location.search);
   const idParam = params.get('id');
-
-  // se non c'è id, prova a leggere data-id dall'HTML (es. <body data-project-id="1">)
   const fallbackId = document.body && document.body.dataset && document.body.dataset.projectId;
   const projectId = idParam || fallbackId;
-
   if (!projectId) return;
 
   const project = portfolioData.find(p => String(p.id) === String(projectId));
@@ -169,61 +165,65 @@ window.portfolioImages = portfolioData.map(item => ({
 
   // imposta immagine principale (se esiste l'elemento)
   if (mainImageEl) {
-    if (project.isVideo) {
-      // se vuoi, puoi gestire il video qui; per ora mettiamo l'immagine cover
-      mainImageEl.src = project.img;
-      mainImageEl.alt = project.title;
-    } else {
-      mainImageEl.src = project.img;
-      mainImageEl.alt = project.title;
-    }
+    mainImageEl.src = project.img;
+    mainImageEl.alt = project.title;
   }
 
   // pulisci container
   if (galleryContainer) galleryContainer.innerHTML = '';
 
-  // se ci sono immagini nella galleria, popolale come miniature cliccabili (lightbox-friendly)
-  const galleryImgs = project.gallery || [];
-  if (galleryImgs.length > 0 && galleryContainer) {
-    // crea wrapper
-    const grid = document.createElement('div');
-    grid.className = 'row';
+  // Genera dinamicamente la galleria in base alle immagini effettivamente esistenti
+  const maxImages = 20; // massimo tentativi per evitare loop infiniti
+  let foundImages = [];
+  let loaded = 0;
+  let checked = 0;
 
-    galleryImgs.forEach((imgItem, index) => {
-      // Supporta sia stringhe che oggetti {src: ...}
-      const imgUrl = typeof imgItem === 'string' ? imgItem : imgItem.src;
-      const col = document.createElement('div');
-      col.className = 'col-md-4 col-6 mb-3';
-
-      // usa <a> con href verso immagine completa; se usi GLightbox o similare, aggiungi attributi
-      col.innerHTML = `
-        <a href="${imgUrl}" class="portfolio-lightbox" data-gallery="portfolioGallery" title="${project.title} - ${index + 1}">
-          <img src="${imgUrl}" class="img-fluid" alt="${project.title} ${index + 1}">
-        </a>
-      `;
-      grid.appendChild(col);
-    });
-
-    galleryContainer.appendChild(grid);
-
-    // se hai GLightbox incluso nella pagina, inizializza (verifica che GLightbox sia caricato)
-    try {
-      if (typeof GLightbox === 'function') {
-        // istanzia solo una volta
-        if (!window._portfolioLightbox) {
-          window._portfolioLightbox = GLightbox({ selector: '.portfolio-lightbox' });
-        } else {
-          window._portfolioLightbox.reload();
-        }
-      }
-    } catch (e) {
-      // GLightbox non disponibile: link aprirà immagine a grandezza naturale
-      // non fare nulla
+  function checkNextImage(idx) {
+    if (idx > maxImages) {
+      renderGallery();
+      return;
     }
-  } else {
-    // nessuna galleria definita: opzionale - mostra solo immagine principale o un messaggio
-    if (galleryContainer) {
+    const imgUrl = `assets/img/img${projectId}-${idx}.jpg`;
+    const img = new window.Image();
+    img.onload = function () {
+      foundImages.push(imgUrl);
+      checkNextImage(idx + 1);
+    };
+    img.onerror = function () {
+      renderGallery();
+    };
+    img.src = imgUrl;
+  }
+
+  function renderGallery() {
+    if (foundImages.length > 0 && galleryContainer) {
+      const grid = document.createElement('div');
+      grid.className = 'row';
+      foundImages.forEach((imgUrl, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-4 col-6 mb-3';
+        col.innerHTML = `
+          <a href="${imgUrl}" class="portfolio-lightbox" data-gallery="portfolioGallery" title="${project.title} - ${index + 1}">
+            <img src="${imgUrl}" class="img-fluid" alt="${project.title} ${index + 1}">
+          </a>
+        `;
+        grid.appendChild(col);
+      });
+      galleryContainer.appendChild(grid);
+      try {
+        if (typeof GLightbox === 'function') {
+          if (!window._portfolioLightbox) {
+            window._portfolioLightbox = GLightbox({ selector: '.portfolio-lightbox' });
+          } else {
+            window._portfolioLightbox.reload();
+          }
+        }
+      } catch (e) {}
+    } else if (galleryContainer) {
       galleryContainer.innerHTML = '<p>Nessuna immagine aggiuntiva disponibile per questo progetto.</p>';
     }
   }
+
+  // Avvia la ricerca delle immagini della galleria
+  checkNextImage(1);
 })();
