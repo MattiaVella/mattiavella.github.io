@@ -23,10 +23,10 @@ const portfolioData = [
     id: 1,
     type: 'filter-model',
     img: 'assets/img/img1.jpg',
-    title: '3D Model Example',
+    title: 'ESEMPIO PROGETTO',
     subtitle: 'Modellazione 3D',
     about: 'Testo personalizzato About per il progetto 1',
-    dynamicParagraph: 'Questo è un paragrafo dinamico per il progetto 1. Puoi modificarlo da JS!',
+    dynamicParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum..',
     link: 'portfolio-details.html',
   type: 'Post',
     gallery: [
@@ -168,25 +168,42 @@ window.portfolioImages = portfolioData.map(item => ({
   }
 
   function renderGallery() {
-    if (foundImages.length > 0 && galleryContainer) {
-      const grid = document.createElement('div');
-      grid.className = 'row';
-      foundImages.forEach((imgUrl, index) => {
-        const col = document.createElement('div');
-        col.className = 'col-md-4 col-6 mb-3';
-        col.innerHTML = `
-          <a href="${imgUrl}" class="portfolio-lightbox" data-gallery="portfolioGallery" title="${project.title} - ${index + 1}">
-            <img src="${imgUrl}" class="img-fluid" alt="${project.title} ${index + 1}">
-          </a>
-        `;
-        grid.appendChild(col);
-      });
-      galleryContainer.appendChild(grid);
+    if (galleryContainer) {
+      galleryContainer.innerHTML = '';
+
+      // Preferisci gallery esplicita nel dataset del progetto, altrimenti usa le immagini trovate
+      const imgs = (project.gallery && project.gallery.length > 0)
+        ? project.gallery
+        : foundImages;
+
+      if (imgs.length > 0) {
+        imgs.forEach((imgUrl, index) => {
+          const col = document.createElement('div');
+          // Usa tre colonne per la galleria: col-lg-4 col-md-6
+          const colClass = 'col-lg-4 col-md-6';
+          col.className = `${colClass} portfolio-item ${project.type || 'filter-app'}`;
+          col.innerHTML = `
+            <div class="portfolio-wrap">
+              <img src="${imgUrl}" class="img-fluid" alt="${project.title} ${index + 1}">
+              <div class="portfolio-info">
+                <h4>${project.title}</h4>
+                <p>Galleria</p>
+                <div class="portfolio-links">
+                  <a href="${imgUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
+                </div>
+              </div>
+            </div>
+          `;
+          galleryContainer.appendChild(col);
+        });
+      } else {
+        galleryContainer.innerHTML = '<p>Nessuna immagine aggiuntiva disponibile per questo progetto.</p>';
+      }
       try {
         if (typeof GLightbox === 'function') {
           if (!window._portfolioLightbox) {
             window._portfolioLightbox = GLightbox({ selector: '.portfolio-lightbox' });
-          } else {
+          } else if (window._portfolioLightbox.reload) {
             window._portfolioLightbox.reload();
           }
         }
@@ -198,4 +215,67 @@ window.portfolioImages = portfolioData.map(item => ({
 
   // Avvia la ricerca delle immagini della galleria
   checkNextImage(1);
+})();
+
+/* --- Popola il paragrafo dinamico (se presente #dynamic-paragraph) --- */
+(function populateDynamicParagraphIfNeeded() {
+  const paraEl = document.getElementById('dynamic-paragraph');
+  if (!paraEl) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const idParam = params.get('id');
+  const fallbackId = document.body && document.body.dataset && document.body.dataset.projectId;
+  const projectId = idParam || fallbackId;
+  if (!projectId) return;
+
+  const project = portfolioData.find(p => String(p.id) === String(projectId));
+  if (!project) return;
+
+  // Usa il campo dynamicParagraph se presente, altrimenti about
+  const text = project.dynamicParagraph || project.about || '';
+  paraEl.textContent = text;
+})();
+
+(function populateDynamicTitleIfNeeded() {
+  const titleEl = document.getElementById('dynamic-title');
+  if (!titleEl) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const idParam = params.get('id');
+  const fallbackId = document.body && document.body.dataset && document.body.dataset.projectId;
+  const projectId = idParam || fallbackId;
+  if (!projectId) return;
+
+  const project = portfolioData.find(p => String(p.id) === String(projectId));
+  if (!project) return;
+
+  titleEl.textContent = project.title || '';
+})();
+
+(function populateMainImageIfNeeded() {
+  const imgEl = document.getElementById('portfolio-main-image');
+  if (!imgEl) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const idParam = params.get('id');
+  const fallbackId = document.body && document.body.dataset && document.body.dataset.projectId;
+  const projectId = idParam || fallbackId;
+  if (!projectId) return;
+
+  const project = portfolioData.find(p => String(p.id) === String(projectId));
+  if (!project) return;
+
+  // Imposta src e alt. Usa project.img come immagine principale.
+  const src = project.img || '';
+  imgEl.src = src;
+  imgEl.alt = project.title || '';
+
+  // Garantire che immagini molto grandi non rompano l'estetica: mantenere max-height e object-fit
+  imgEl.style.width = '100%';
+  imgEl.style.display = 'block';
+  imgEl.style.objectFit = 'cover';
+  imgEl.style.maxHeight = imgEl.style.maxHeight || '480px';
+  imgEl.style.height = 'auto';
+
+  // Se l'immagine è un video o url esterno diverso, non fare nulla di particolare
 })();

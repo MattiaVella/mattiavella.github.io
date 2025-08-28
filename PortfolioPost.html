@@ -40,184 +40,54 @@
         <li><a href="index.html#contact" class="nav-link "><i class="bx bx-envelope"></i> <span>Contatti</span></a></li>
       </ul>
     </nav>
-  </header> 
+  </header>
 
-<main id="main">
+  <main id="main">
     <!-- ======= Portfolio Details Section ======= -->
     <section id="about" class="about">
-      
       <div class="container" data-aos="fade-up">
-
-
         <div class="row">
-          <div class="col-lg-4 col-md-6"  >
-            <img src="https://source.unsplash.com/random/?product-render" class="img-fluid" alt="" >
+          <div class="col-lg-4 col-md-6">
+            <img src="https://source.unsplash.com/random/?product-render" class="img-fluid" alt="">
             <div class="image-text">
-              <h2  style="text-align: right; font-size: 500%;  line-height: 1em">RENDER MOLTO BELLO</h2>
+              <h2 id="dynamic-title" style="text-align: right; font-size: 500%;  line-height: 1em"></h2>
             </div>
           </div>
-            <div class="col-lg-8 pt-4 pt-lg-0 content">
 
-              <div style="max-width: 700px; margin: 0 auto;">
-                <video style="width: 100%; display: block;" height="auto" autoplay loop muted>
-                  <source src="assets\images\render2.mp4" type="video/mp4">
-                </video>
+          <div class="col-lg-8 pt-4 pt-lg-0 content">
+            <div style="max-width: 700px; margin: 0 auto;">
+              <!-- Immagine principale dinamica (sostituisce il video). Lo src verrà impostato da assets/js/portfolio.js -->
+              <img id="portfolio-main-image" src="" alt="" style="width: 100%; display: block; object-fit: cover; max-height: 480px; height: auto;" />
 
-                <!-- ======= Nuova Sezione ======= -->
-                <section id="nuova-sezione" class="nuova-sezione">
-                  <div class="section-title">
-                    <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum...</p>
-                  </div>
-                </section>
+              <!-- ======= Nuova Sezione paragrafo (dinamica) ======= -->
+              <section id="nuova-sezione" class="nuova-sezione">
+                <div class="section-title">
+                  <p id="dynamic-paragraph" style="text-align: justify;"></p>
+                </div>
+              </section>
 
-                <!-- ======= Galleria ======= -->
-                <section id="portfolio" class="portfolio section-bg" data-aos="fade-up">
-                  <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/img1.jpg" class="img-fluid" alt="img1.jpg">
-                        <div class="portfolio-info">
-                          <h4>img1.jpg</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/img1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/img1-1.jpg" class="img-fluid" alt="img1-1.jpg">
-                        <div class="portfolio-info">
-                          <h4>img1-1.jpg</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/img1-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/img1-2.jpg" class="img-fluid" alt="img1-2.jpg">
-                        <div class="portfolio-info">
-                          <h4>img1-2.jpg</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/img1-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/img1-3.jpg" class="img-fluid" alt="img1-3.jpg">
-                        <div class="portfolio-info">
-                          <h4>img1-3.jpg</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/img1-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/img2.jpg" class="img-fluid" alt="img2.jpg">
-                        <div class="portfolio-info">
-                          <h4>img2.jpg</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/img2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/img2-1.jpg" class="img-fluid" alt="img2-1.jpg">
-                        <div class="portfolio-info">
-                          <h4>img2-1.jpg</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/img2-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/img2-2.jpg" class="img-fluid" alt="img2-2.jpg">
-                        <div class="portfolio-info">
-                          <h4>img2-2.jpg</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/img2-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/img2-3.jpg" class="img-fluid" alt="img2-3.jpg">
-                        <div class="portfolio-info">
-                          <h4>img2-3.jpg</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/img2-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                      <div class="portfolio-wrap">
-                        <img src="assets/img/mattia.png" class="img-fluid" alt="mattia.png">
-                        <div class="portfolio-info">
-                          <h4>mattia.png</h4>
-                          <p>Galleria</p>
-                          <div class="portfolio-links">
-                            <a href="assets/img/mattia.png" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-
-
-
+              <!-- Galleria spostata in fondo come full-width (mantiene #portfolio-gallery per compatibilità JS) -->
+              <!-- galleria rimossa da qui -->
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ======= Galleria con margini coerenti ======= -->
+    <!-- ======= Galleria full-width (singola colonna) ======= -->
     <section id="portfolio-fullwidth" class="portfolio section-bg">
-  <!-- <div class="container" data-aos="fade-up" style="padding: 0;"> -->
-  <!-- Rimosso il secondo container e la galleria, aggiungi qui eventuale nuovo contenuto se necessario -->
+    <div class="container-fluid portfolio-fullwidth-inner" data-aos="fade-up">
+        <div class="row">
+          <div class="col-12">
+            <div id="portfolio-gallery" class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+              <!-- Le immagini verranno inserite qui tramite JS da assets/js/portfolio.js -->
+            </div>
           </div>
         </div>
       </div>
     </section>
-            </div>
-
-            
-
-
-
-        </div>
-      </div>
-
-    </section>
-  </section>
   </main>
-  
-  
 
-
-  
   <!-- End #main -->
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -234,6 +104,7 @@
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
 
   <!-- Template Main JS File -->
+  <script src="assets/js/portfolio.js"></script>
   <script src="assets/js/main.js"></script>
 
 </body>
