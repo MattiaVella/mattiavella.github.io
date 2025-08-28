@@ -1,14 +1,32 @@
-// portfolio.js — versione estesa con galleria per id = 1
-// Dati portfolio (aggiungi/ modifica URL immagini come preferisci)
+// portfolio.js — versione estesa con galleria
+// === GUIDA: Per aggiungere un nuovo progetto, copia il template qui sotto ===
+/*
+{
+  id: X, // Numero progressivo unico
+  type: 'filter-model', // Categoria (es: filter-model, filter-archiviz, ecc)
+  img: 'assets/img/imgX.jpg', // Immagine principale o video
+  title: 'Titolo progetto',
+  subtitle: 'Sottotitolo o breve descrizione',
+  about: 'Testo about personalizzato',
+  dynamicParagraph: 'Paragrafo dinamico opzionale',
+  link: 'portfolio-details.html', // Pagina di dettaglio
+  isVideo: false, // true se img è un video mp4
+  gallery: [ // Array opzionale di immagini aggiuntive
+    'assets/img/imgX-1.jpg',
+    'assets/img/imgX-2.jpg'
+  ]
+},
+*/
+
 const portfolioData = [
   {
     id: 1,
     type: 'filter-model',
-    about: "Testo personalizzato About per il progetto 1",
-    dynamicParagraph: "Questo è un paragrafo dinamico per il progetto 1. Puoi modificarlo da JS!",
     img: 'assets/img/img1.jpg',
     title: '3D Model Example',
     subtitle: 'Modellazione 3D',
+    about: 'Testo personalizzato About per il progetto 1',
+    dynamicParagraph: 'Questo è un paragrafo dinamico per il progetto 1. Puoi modificarlo da JS!',
     link: 'portfolio-details.html',
     isVideo: false,
     gallery: [
@@ -22,9 +40,9 @@ const portfolioData = [
     type: 'filter-archiviz',
     img: 'assets/img/img2.jpg',
     title: 'Archiviz Example',
-    about: "Testo personalizzato About per il progetto 2",
-    dynamicParagraph: "Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!",
-    subtitle: 'Visualizzazione Architettonica Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modific Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modific Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modific',
+    subtitle: 'Visualizzazione Architettonica',
+    about: 'Testo personalizzato About per il progetto 2',
+    dynamicParagraph: 'Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!',
     link: 'portfolio-details.html',
     isVideo: false,
     gallery: [
@@ -34,7 +52,28 @@ const portfolioData = [
   }
 ];
 
-// Esponi la struttura compatibile con portfolio-details.html (window.portfolioImages)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Esporta la struttura compatibile con portfolio-details.html
 window.portfolioImages = portfolioData.map(item => ({
   id: item.id,
   src: item.img,
@@ -47,7 +86,7 @@ window.portfolioImages = portfolioData.map(item => ({
   gallery: (item.gallery || []).map(g => ({ src: g }))
 }));
 
-/* --- Popola la index (se presente #portfolio-items) --- */
+// --- Popola la index (se presente #portfolio-items) ---
 (function populateIndexIfNeeded() {
   const portfolioContainer = document.getElementById('portfolio-items');
   if (!portfolioContainer) return;
@@ -67,10 +106,6 @@ window.portfolioImages = portfolioData.map(item => ({
         <a href="${detailLink}" title="Portfolio Details" class="portfolio-info-link">
           <div class="portfolio-info">
             <h4>${item.title}</h4>
-            <p>${item.subtitle}</p>
-            <div class="portfolio-links">
-              <i class="bx bx-plus"></i>
-            </div>
           </div>
         </a>
       </div>
