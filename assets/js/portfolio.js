@@ -10,7 +10,7 @@
   about: 'Testo about personalizzato',
   dynamicParagraph: 'Paragrafo dinamico opzionale',
   link: 'portfolio-details.html', // Pagina di dettaglio
-  isVideo: false, // true se img è un video mp4
+  type: 'Work', // 'Work', 'Post', 'Video'
   gallery: [ // Array opzionale di immagini aggiuntive
     'assets/img/imgX-1.jpg',
     'assets/img/imgX-2.jpg'
@@ -28,7 +28,7 @@ const portfolioData = [
     about: 'Testo personalizzato About per il progetto 1',
     dynamicParagraph: 'Questo è un paragrafo dinamico per il progetto 1. Puoi modificarlo da JS!',
     link: 'portfolio-details.html',
-    isVideo: false,
+  type: 'Post',
     gallery: [
       'assets/img/img1-1.jpg',
       'assets/img/img1-2.jpg',
@@ -44,7 +44,7 @@ const portfolioData = [
     about: 'Testo personalizzato About per il progetto 2',
     dynamicParagraph: 'Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!',
     link: 'portfolio-details.html',
-    isVideo: false,
+  type: 'Work',
     gallery: [
       'assets/img/img2-1.jpg',
       'assets/img/img2-2.jpg'
@@ -81,8 +81,7 @@ window.portfolioImages = portfolioData.map(item => ({
   subtitle: item.subtitle,
   about: item.about,
   dynamicParagraph: item.dynamicParagraph,
-  link: item.link,
-  isVideo: item.isVideo,
+  type: item.type,
   gallery: (item.gallery || []).map(g => ({ src: g }))
 }));
 
@@ -94,10 +93,16 @@ window.portfolioImages = portfolioData.map(item => ({
   portfolioData.forEach(item => {
     const col = document.createElement('div');
     col.className = `col-lg-4 col-md-6 portfolio-item ${item.type}`;
-    const detailLink = `${item.link}?id=${item.id}`;
+    let detailPage = 'portfolio-details.html';
+    if (item.type === 'Post') {
+      detailPage = 'PortfolioPost.html';
+    } else if (item.type === 'Video') {
+      detailPage = 'portfolio-details-video.html';
+    }
+    const detailLink = `${detailPage}?id=${item.id}`;
     col.innerHTML = `
       <div class="portfolio-wrap">
-        ${item.isVideo
+        ${item.type === 'Video'
           ? `<video class="img-fluid" autoplay loop muted>
                <source src="${item.img}" type="video/mp4" />
              </video>`
