@@ -1082,3 +1082,11 @@ section {
 #footer .credits {
   font-size: 13px;
 }
+.container {
+  position: relative;
+}
+spline-viewer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

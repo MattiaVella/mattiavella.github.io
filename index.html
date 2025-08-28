@@ -51,21 +51,6 @@
   <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-
-  <style>
-    .container {
-      position: relative;
-    }
-
-    spline-viewer {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-  </style>
-
-  
-
   <section id="hero" class="d-flex flex-column justify-content-center">
     <video autoplay muted loop id="myVideo">
       <source src="assets\Video\Video.mp4" type="video/mp4"> 
@@ -114,130 +99,8 @@
           </div>
         </div>
 
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-4 col-md-6 portfolio-item filter-model">
-            <div class="portfolio-wrap">
-              <img src="https://source.unsplash.com/random/?3d-model" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Titolo1</h4>
-                <p>Sottotitolo1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details.html"  data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-archiviz">
-            <div class="portfolio-wrap">
-              <img src="https://source.unsplash.com/random/?archiviz" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Titolo1</h4>
-                <p>Sottotitolo1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details.html"  data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-animation">
-            <div class="portfolio-wrap">
-              <video class="img-fluid" autoplay loop muted>
-                <source src="assets\images\render2.mp4" type="video/mp4" />
-              </video>
-              <div class="portfolio-info">
-                <h4>Title1</h4>
-                <p>Subtitle1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details-video.html"  data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-model">
-            <div class="portfolio-wrap">
-              <img src="https://source.unsplash.com/random/?3d-modeling" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Title1</h4>
-                <p>Subtitle1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details.html"  data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-animation">
-            <div class="portfolio-wrap">
-              <video class="img-fluid" autoplay loop muted>
-                <source src="assets\images\render3.mp4" type="video/mp4" />
-              </video>
-              <div class="portfolio-info">
-                <h4>Title1</h4>
-                <p>Subtitle1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details-video.html"  data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-archiviz">
-            <div class="portfolio-wrap">
-              <img src="https://source.unsplash.com/random/?architectural-render" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Titolo1</h4>
-                <p>Sottotitolo1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details.html" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-render">
-            <div class="portfolio-wrap">
-              <img src="https://source.unsplash.com/random/?3d-render" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Title1</h4>
-                <p>Subtitle1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details.html"  data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-render">
-            <div class="portfolio-wrap">
-              <img src="https://source.unsplash.com/random/?render" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Title1</h4>
-                <p>Subtitle1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details.html"  data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-animation">
-            <div class="portfolio-wrap">
-              <video class="img-fluid" autoplay loop muted>
-                <source src="assets\images\render1.mp4" type="video/mp4" />
-              </video>
-              <div class="portfolio-info">
-                <h4>Title1</h4>
-                <p>Subtitle1</p>
-                <div class="portfolio-links">
-                  <a href="portfolio-details-video.html"  data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200" id="portfolio-items">
+          <!-- Gli elementi del portfolio saranno generati via JS -->
         </div>
 
       </div>
@@ -426,7 +289,8 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <!-- Script per generare dinamicamente il portfolio -->
+  <script src="assets/js/portfolio.js"></script>
 </body>
 
 </html>
