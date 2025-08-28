@@ -42,8 +42,6 @@
     </nav>
   </header> 
 
-  
-
   <main id="main">
     <!-- ======= Portfolio Details Section ======= -->
     <section id="about" class="about">
@@ -57,7 +55,8 @@
 
         <div class="row">
           <div class="col-lg-4 col-md-6">
-            <img src="https://source.unsplash.com/random/?product-render" class="img-fluid" alt="">
+            <!-- Aggiunto id per l'immagine principale -->
+            <img id="portfolio-main-image" src="https://source.unsplash.com/random/?product-render" class="img-fluid" alt="">
             <div class="image-text">
               <h2  style="text-align: right; font-size: 500%;  line-height: 1em">RENDER MOLTO BELLO</h2>
             </div>
@@ -67,72 +66,8 @@
             
             
               <div  id="portfolio" class="portfolio section-bg" data-aos="fade-up">
-                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                      <img src="https://source.unsplash.com/random/?product-render-3d" class="img-fluid" alt="">
-                      <div class="portfolio-info">
-                        <h4>Titolo1</h4>
-                        <p>Sottotitolo1</p>
-                        <div class="portfolio-links">
-                          <a href="https://source.unsplash.com/random/?product-render-3d" data-gallery="portfolioGallery" class="portfolio-lightbox" ><i class="bx bx-plus"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                      <img src="https://source.unsplash.com/random/?minimal" class="img-fluid" alt="">
-                      <div class="portfolio-info">
-                        <h4>Titolo1</h4>
-                        <p>Sottotitolo1</p>
-                        <div class="portfolio-links">
-                          <a href="https://source.unsplash.com/random/?minimal" data-gallery="portfolioGallery" class="portfolio-lightbox" ><i class="bx bx-plus"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-        
-                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                      <img src="https://source.unsplash.com/random/?3d-modeling" class="img-fluid" alt="">
-                      <div class="portfolio-info">
-                        <h4>Title1</h4>
-                        <p>Subtitle1</p>
-                        <div class="portfolio-links">
-                          <a href="https://source.unsplash.com/random/?3d-modeling" data-gallery="portfolioGallery" class="portfolio-lightbox" ><i class="bx bx-plus"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                      <img src="https://source.unsplash.com/random/?technology" class="img-fluid" alt="">
-                      <div class="portfolio-info">
-                        <h4>Titolo2</h4>
-                        <p>Sottotitolo2</p>
-                        <div class="portfolio-links">
-                          <a href="https://source.unsplash.com/random/?technology" data-gallery="portfolioGallery" class="portfolio-lightbox" ><i class="bx bx-plus"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                      <img src="https://source.unsplash.com/random/?design" class="img-fluid" alt="">
-                      <div class="portfolio-info">
-                        <h4>Titolo3</h4>
-                        <p>Sottotitolo3</p>
-                        <div class="portfolio-links">
-                          <a href="https://source.unsplash.com/random/?design" data-gallery="portfolioGallery" class="portfolio-lightbox" ><i class="bx bx-plus"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
+                <div class="row portfolio-container" id="portfolio-gallery" data-aos="fade-up" data-aos-delay="200">
+                  <!-- Le immagini verranno inserite qui tramite JS da portfolio.js -->
                 </div>
               </div>
           </div>
@@ -157,10 +92,12 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/typed.js/typed.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-
+  
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  
+  <!-- Includi portfolio.js -->
+  <script src="assets/js/portfolio.js"></script>
 </body>
 
 </html>
