@@ -34,7 +34,11 @@
       aboutText: it.aboutText || it.about || '',
       dynamicParagraph: it.dynamicParagraph || '',
       kind: it.kind || 'Work', // Work | Post | Video
-      gallery: Array.isArray(it.gallery) ? it.gallery : []
+      gallery: Array.isArray(it.gallery) ? it.gallery : [],
+      // Nuovi campi
+      meta: it.meta || null, // { client, date, role, tags: [] }
+      links: Array.isArray(it.links) ? it.links : [], // [{label, url, icon?}]
+      collaborators: Array.isArray(it.collaborators) ? it.collaborators : [] // [{name, role?, url?}]
     }));
   }
 
@@ -180,6 +184,104 @@
     if (descEl) descEl.textContent = project ? (project.subtitle || '') : '';
 
     if (project && project.title) document.title = project.title + ' - Portfolio Details';
+
+    // Sottotitolo
+    const subtitleEl = document.getElementById('dynamic-subtitle');
+    if (subtitleEl) subtitleEl.textContent = project.subtitle || '';
+
+    // Kicker (categoria/tag breve)
+    const kickerEl = document.getElementById('project-kicker');
+    if (kickerEl) {
+      let kicker = '';
+      // Prova dai tag meta
+      if (project.meta && Array.isArray(project.meta.tags) && project.meta.tags.length) {
+        kicker = project.meta.tags[0];
+      }
+      // In fallback usa la classe filtro
+      if (!kicker && project.type) {
+        const map = {
+          'filter-model': '3D Model',
+          'filter-archiviz': 'Archiviz',
+          'filter-render': 'Render',
+          'filter-animation': 'Animation'
+        };
+        kicker = map[project.type] || 'Project';
+      }
+      kickerEl.textContent = kicker;
+      kickerEl.style.display = kicker ? '' : 'none';
+    }
+
+    // Meta
+    const metaUl = document.getElementById('project-meta');
+    if (metaUl) {
+      metaUl.innerHTML = '';
+      const m = project.meta || {};
+      const parts = [];
+      if (m.client) parts.push(`<li class="list-inline-item me-3"><i class="bi bi-building me-1"></i><span>${m.client}</span></li>`);
+      if (m.role) parts.push(`<li class="list-inline-item me-3"><i class="bi bi-person-badge me-1"></i><span>${m.role}</span></li>`);
+      if (m.date) parts.push(`<li class="list-inline-item me-3"><i class="bi bi-calendar-event me-1"></i><span>${m.date}</span></li>`);
+      if (Array.isArray(m.tags) && m.tags.length) {
+        const tags = m.tags.map(t => `<span class="badge rounded-pill bg-secondary-subtle text-secondary me-1">${t}</span>`).join('');
+        parts.push(`<li class="list-inline-item">${tags}</li>`);
+      }
+      metaUl.innerHTML = parts.join('');
+    }
+
+    // Links
+    const linksRow = document.getElementById('project-links');
+    if (linksRow) {
+      linksRow.innerHTML = '';
+      (project.links || []).forEach(link => {
+        if (!link || !link.url) return;
+        const col = document.createElement('div');
+        col.className = 'col-12 col-sm-6 col-lg-4';
+        const icon = link.icon ? `<i class="bi ${link.icon} me-1"></i>` : '<i class="bi bi-link-45deg me-1"></i>';
+        col.innerHTML = `
+          <a class="card link-card h-100" href="${link.url}" target="_blank" rel="noopener">
+            <div class="card-body d-flex align-items-center">
+              ${icon}
+              <span>${link.label || link.url}</span>
+            </div>
+          </a>
+        `;
+        linksRow.appendChild(col);
+      });
+      if (!linksRow.children.length) {
+        const wrapper = linksRow.parentElement; // contains heading + row
+        if (wrapper) wrapper.style.display = 'none';
+      }
+    }
+
+    // Collaborators
+    const collabRow = document.getElementById('project-collaborators');
+    if (collabRow) {
+      collabRow.innerHTML = '';
+      (project.collaborators || []).forEach(c => {
+        if (!c || !c.name) return;
+        const col = document.createElement('div');
+        col.className = 'col-12 col-sm-6 col-lg-4';
+        const inner = document.createElement(c.url ? 'a' : 'div');
+        inner.className = 'card collaborator-card h-100';
+        if (c.url) { inner.href = c.url; inner.target = '_blank'; inner.rel = 'noopener'; }
+        inner.innerHTML = `
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="avatar-circle me-3"><i class="bi bi-person"></i></div>
+              <div>
+                <div class="fw-semibold">${c.name}</div>
+                ${c.role ? `<div class="text-muted small">${c.role}</div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+        col.appendChild(inner);
+        collabRow.appendChild(col);
+      });
+      if (!collabRow.children.length) {
+        const wrapper = collabRow.parentElement;
+        if (wrapper) wrapper.style.display = 'none';
+      }
+    }
   }
 
   function initLightbox() {

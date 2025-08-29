@@ -25,6 +25,19 @@
           "about": "Testo personalizzato About per il progetto 1",
           "aboutText": "Testo personalizzato About per il progetto 1",
           "dynamicParagraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum.",
+          "meta": {
+            "client": "Cliente Demo",
+            "date": "2025",
+            "role": "3D Artist",
+            "tags": ["Modeling", "Blender", "Cycles"]
+          },
+          "links": [
+            { "label": "Behance", "url": "https://www.behance.net/", "icon": "bi-box-arrow-up-right" },
+            { "label": "Repository", "url": "https://github.com/", "icon": "bi-github" }
+          ],
+          "collaborators": [
+            { "name": "Nome Collaboratore", "role": "Concept Artist", "url": "https://instagram.com/" }
+          ],
           "gallery": [
             "assets/img/img1-1.jpg",
             "assets/img/img1-2.jpg",
@@ -41,6 +54,18 @@
           "about": "Testo personalizzato About per il progetto 2",
           "aboutText": "Testo personalizzato About per il progetto 2",
           "dynamicParagraph": "Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!",
+          "meta": {
+            "client": "Studio XYZ",
+            "date": "2024",
+            "role": "Render Artist",
+            "tags": ["Archiviz", "Lighting", "Post"]
+          },
+          "links": [
+            { "label": "ArtStation", "url": "https://www.artstation.com/", "icon": "bi-link-45deg" }
+          ],
+          "collaborators": [
+            { "name": "Nome Collaboratore 2", "role": "Architect" }
+          ],
           "gallery": [
             "assets/img/img2-1.jpg",
             "assets/img/img2-2.jpg"

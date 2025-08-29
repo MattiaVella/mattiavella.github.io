@@ -43,42 +43,62 @@
   </header>
 
   <main id="main">
-    <!-- ======= Portfolio Details Section ======= -->
+    <!-- ======= Dettagli Progetto ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
-        <div class="row">
-          <div class="col-lg-4 col-md-6">
-            <img src="https://source.unsplash.com/random/?product-render" class="img-fluid" alt="">
-            <div class="image-text">
-              <h2 id="dynamic-title" style="text-align: right; font-size: 500%;  line-height: 1em"></h2>
+        <!-- Back link -->
+        <div class="row mb-3">
+          <div class="col">
+            <a href="index.html#portfolio" class="back-link"><i class="bi bi-arrow-left me-2"></i>Torna al portfolio</a>
+          </div>
+        </div>
+
+        <!-- Header: titolo a sinistra, immagine a destra -->
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6" data-aos="fade-right">
+            <div class="mb-2 text-uppercase kicker" id="project-kicker"></div>
+            <h1 id="dynamic-title" class="post-title mb-2">Titolo Progetto</h1>
+            <p id="dynamic-subtitle" class="text-muted mb-0"></p>
+          </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="post-media-wrap">
+              <img id="portfolio-main-image" src="" alt="" class="img-fluid" />
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-8 pt-4 pt-lg-0 content">
-            <div style="max-width: 700px; margin: 0 auto;">
-              <!-- Immagine principale dinamica (sostituisce il video). Lo src verrà impostato da assets/js/portfolio.js -->
-              <img id="portfolio-main-image" src="" alt="" style="width: 100%; display: block; object-fit: cover; max-height: 480px; height: auto;" />
+        <!-- Meta (cliente, data, tag) -->
+        <ul id="project-meta" class="project-meta list-inline mt-4"></ul>
 
-              <!-- ======= Nuova Sezione paragrafo (dinamica) ======= -->
-              <section id="nuova-sezione" class="nuova-sezione">
-                <div class="section-title">
-                  <p id="dynamic-paragraph" style="text-align: justify;"></p>
-                </div>
-              </section>
+        <hr class="section-divider" />
 
-              <!-- Galleria spostata in fondo come full-width (mantiene #portfolio-gallery per compatibilità JS) -->
-              <!-- galleria rimossa da qui -->
-            </div>
-          </div>
+        <!-- Descrizione -->
+        <div class="mt-3">
+          <p id="dynamic-paragraph" class="lead" style="text-align: justify;"></p>
+        </div>
+
+        <!-- Riferimenti / Link utili -->
+        <div class="mt-4" data-aos="fade-up">
+          <h3 class="h5 mb-3"><i class="bi bi-link-45deg me-2"></i>Riferimenti</h3>
+          <div id="project-links" class="row g-3"></div>
+        </div>
+
+        <!-- Collaboratori -->
+        <div class="mt-4" data-aos="fade-up">
+          <h3 class="h5 mb-3"><i class="bi bi-people me-2"></i>Collaboratori</h3>
+          <div id="project-collaborators" class="row g-3"></div>
         </div>
       </div>
     </section>
 
     <!-- ======= Galleria full-width (singola colonna) ======= -->
     <section id="portfolio-fullwidth" class="portfolio section-bg">
-    <div class="container-fluid portfolio-fullwidth-inner" data-aos="fade-up">
+      <div class="container-fluid portfolio-fullwidth-inner" data-aos="fade-up">
         <div class="row">
           <div class="col-12">
+            <div class="section-title">
+              <h2>Galleria</h2>
+            </div>
             <div id="portfolio-gallery" class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
               <!-- Le immagini verranno inserite qui tramite JS da assets/js/portfolio.js -->
             </div>
