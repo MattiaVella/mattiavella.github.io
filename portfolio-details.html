@@ -91,60 +91,9 @@
   <script src="assets/vendor/typed.js/typed.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
   
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  
-  <!-- Includi portfolio.js -->
+  <!-- Includi portfolio.js e poi lo script principale del template -->
   <script src="assets/js/portfolio.js"></script>
-  <script>
-    // Script per rendere dinamico il testo About
-    (function() {
-      function getIdFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get('id');
-      }
-      const id = getIdFromUrl();
-      if (!id || !window.portfolioImages) return;
-      const project = window.portfolioImages.find(p => String(p.id) === String(id));
-      if (!project) return;
-      // Testo About
-      const aboutTextEl = document.getElementById('portfolio-about-text');
-      if (aboutTextEl && project.about) aboutTextEl.textContent = project.about;
-    })();
-  </script>
-  <script>
-    // Script per rendere dinamici titolo, descrizione, immagine principale e sezione About
-    (function() {
-      function getIdFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get('id');
-      }
-      const id = getIdFromUrl();
-      if (!id || !window.portfolioImages) return;
-      const project = window.portfolioImages.find(p => String(p.id) === String(id));
-      if (!project) return;
-      // Titolo
-      const titleEl = document.getElementById('portfolio-title');
-      if (titleEl) titleEl.textContent = project.title;
-      // Immagine principale
-      const mainImg = document.getElementById('portfolio-main-image');
-      if (mainImg) mainImg.src = project.src;
-      // Descrizione (usa subtitle come esempio, puoi aggiungere altri campi)
-      const descEl = document.getElementById('portfolio-description');
-      if (descEl) descEl.textContent = project.subtitle;
-  // About title
-  const aboutTitle = document.getElementById('portfolio-about-title');
-  if (aboutTitle && project.about) aboutTitle.textContent = project.about;
-  // About text
-  const aboutText = document.getElementById('portfolio-about-text');
-  if (aboutText && project.aboutText) aboutText.textContent = project.aboutText;
-  // Paragrafo dinamico
-  const dynamicParagraph = document.getElementById('portfolio-dynamic-paragraph');
-  if (dynamicParagraph && project.dynamicParagraph) dynamicParagraph.textContent = project.dynamicParagraph;
-  // Cambia anche il <title> della pagina
-  document.title = project.title + ' - Portfolio Details';
-    })();
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>

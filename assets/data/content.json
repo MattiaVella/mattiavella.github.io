@@ -1,0 +1,52 @@
+{
+  "site": {
+    "title": "Mattia Vella",
+    "social": {
+      "facebook": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    },
+    "portfolio": {
+      "filters": [
+        { "label": "All", "filter": "*" },
+        { "label": "3D model", "filter": ".filter-model" },
+        { "label": "Archiviz", "filter": ".filter-archiviz" },
+        { "label": "Render", "filter": ".filter-render" },
+        { "label": "Animation", "filter": ".filter-animation" }
+      ],
+      "items": [
+        {
+          "id": 1,
+          "filter": "filter-model",
+          "kind": "Post",
+          "media": { "type": "image", "src": "assets/img/img1.jpg" },
+          "title": "ESEMPIO PROGETTO",
+          "subtitle": "Modellazione 3D",
+          "about": "Testo personalizzato About per il progetto 1",
+          "aboutText": "Testo personalizzato About per il progetto 1",
+          "dynamicParagraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum.",
+          "gallery": [
+            "assets/img/img1-1.jpg",
+            "assets/img/img1-2.jpg",
+            "assets/img/img1-3.jpg"
+          ]
+        },
+        {
+          "id": 2,
+          "filter": "filter-archiviz",
+          "kind": "Work",
+          "media": { "type": "image", "src": "assets/img/img2.jpg" },
+          "title": "Archiviz Example",
+          "subtitle": "Visualizzazione Architettonica",
+          "about": "Testo personalizzato About per il progetto 2",
+          "aboutText": "Testo personalizzato About per il progetto 2",
+          "dynamicParagraph": "Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!",
+          "gallery": [
+            "assets/img/img2-1.jpg",
+            "assets/img/img2-2.jpg"
+          ]
+        }
+      ]
+    }
+  }
+}
