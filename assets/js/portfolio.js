@@ -301,6 +301,24 @@
     }
   }
 
+  function populateEmbed(project) {
+    const section = document.getElementById('project-embed-section');
+    const iframe = document.getElementById('project-embed-iframe');
+    const link = document.getElementById('project-embed-link');
+    const label = document.getElementById('project-embed-label');
+    if (!section || !iframe || !link || !label) return;
+    const e = project && project.embed;
+    if (e && e.url) {
+      iframe.src = e.url;
+      link.href = e.url;
+      label.textContent = e.label || 'Apri a schermo intero';
+      section.style.display = '';
+    } else {
+      section.style.display = 'none';
+      iframe.removeAttribute('src');
+    }
+  }
+
   function initLightbox() {
     try {
       if (typeof GLightbox === 'function') {
@@ -510,6 +528,8 @@
         // Prima/Dopo (mostra solo se specificato nel content.json)
         try { populateBeforeAfter(project); } catch(_) {}
         populateDetailsGallery(project);
+  // Iframe embed opzionale
+  try { populateEmbed(project); } catch(_) {}
       }
     }
   })();
