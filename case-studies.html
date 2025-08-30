@@ -120,8 +120,10 @@
       }
 
       function mediaBlock(item) {
-        const alt = (item.title || 'Media');
-        if (item.media && item.media.type === 'video') {
+  const alt = (item.title || 'Media');
+  // If no media or no src, skip rendering the media block entirely
+  if (!item || !item.media || !item.media.src) return '';
+  if (item.media.type === 'video') {
           return `
             <div class="ratio ratio-16x9 mb-3">
               <video controls preload="metadata">
@@ -130,8 +132,27 @@
             </div>
           `;
         }
-        const src = item.media && item.media.src ? item.media.src : '';
-        return `<img src="${src}" alt="${alt}" class="img-fluid mb-3" loading="lazy">`;
+  return `<img src="${item.media.src}" alt="${alt}" class="img-fluid mb-3" loading="lazy">`;
+      }
+
+      function embedBlock(item) {
+        const e = item && item.embed;
+        const url = (typeof e === 'string') ? e : (e && e.url);
+        const label = (e && e.label) ? e.label : 'Apri a schermo intero';
+        if (!url) return '';
+        return `
+          <div class="mt-2">
+            <h4 class="h6 text-uppercase text-secondary"><i class="bi bi-aspect-ratio me-1"></i>Anteprima interattiva</h4>
+            <div class="embed-wrap ratio ratio-16x9 shadow-lg" style="border-radius:12px; overflow:hidden;">
+              <iframe src="${url}" title="Anteprima interattiva" loading="lazy" referrerpolicy="no-referrer" style="border:0; width:100%; height:100%; background:#0f0f0f;" allowfullscreen></iframe>
+            </div>
+            <div class="text-end mt-2">
+              <a href="${url}" target="_blank" rel="noopener" class="small text-secondary">
+                <i class="bi bi-box-arrow-up-right me-1"></i><span>${label}</span>
+              </a>
+            </div>
+          </div>
+        `;
       }
 
       function linksBlock(links) {
@@ -165,13 +186,11 @@
                 <div class="col-lg-4 col-md-6 portfolio-item ${item.category ? 'filter-' + item.category : ''}">
                   <div class="portfolio-wrap">
                     <img src="${g}" class="img-fluid" alt="${item.title} ${idx + 1}" loading="lazy">
-                    <div class="portfolio-info">
-                      <h4>${item.title}</h4>
-                      <p>Gallery</p>
-                      <div class="portfolio-links">
-                        <a href="${g}" data-gallery="${gid}" class="portfolio-lightbox" aria-label="Apri immagine"><i class="bx bx-plus"></i></a>
+                    <a href="${g}" data-gallery="${gid}" class="portfolio-lightbox portfolio-info-link" aria-label="Apri immagine ${idx + 1}">
+                      <div class="portfolio-info">
+                        <h4>${item.title}</h4>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
               `).join('')}
@@ -248,6 +267,7 @@
                 ${item.subtitle ? `<h3 class="h5 text-secondary mb-3">${item.subtitle}</h3>` : ''}
                 <ul class="list-inline mb-3">${metaList(item.meta)}</ul>
                 ${mediaBlock(item)}
+                ${embedBlock(item)}
                 ${linksBlock(item.links)}
               </div>
               <div class="col-12 col-lg-7">

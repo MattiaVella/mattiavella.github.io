@@ -49,7 +49,8 @@
         meta: it.meta || null, // { client, date, role, tags: [] }
         links: Array.isArray(it.links) ? it.links : [], // [{label, url, icon?}]
   collaborators: Array.isArray(it.collaborators) ? it.collaborators : [], // [{name, role?, url?}]
-  beforeAfter
+  beforeAfter,
+  embed: it.embed || null
       };
     });
   }
@@ -83,13 +84,17 @@
       const col = document.createElement('div');
       col.className = `col-lg-4 col-md-6 portfolio-item ${item.type || ''}`;
       const detailLink = computeDetailLink(item);
-      const mediaHTML = item.mediaType === 'video'
-        ? `<video class="img-fluid" autoplay loop muted><source src="${item.img}" type="video/mp4" /></video>`
-        : `<img src="${item.img}" class="img-fluid" alt="${item.title}">`;
+      // Render media only if a valid src exists
+      let mediaHTML = '';
+      if (item && item.img) {
+        mediaHTML = item.mediaType === 'video'
+          ? `<video class="img-fluid" autoplay loop muted><source src="${item.img}" type="video/mp4" /></video>`
+          : `<img src="${item.img}" class="img-fluid" alt="${item.title}">`;
+      }
       col.innerHTML = `
         <div class="portfolio-wrap">
           ${mediaHTML}
-          <a href="${detailLink}" title="Portfolio Details" class="portfolio-info-link">
+          <a href="${detailLink}" title="Portfolio Details" class="portfolio-info-link" aria-label="Apri dettagli: ${item.title}">
             <div class="portfolio-info">
               <h4>${item.title}</h4>
             </div>
@@ -146,7 +151,12 @@
   function populateDetailsBasics(project) {
     const mainImageEl = document.getElementById('portfolio-main-image');
     if (mainImageEl && project) {
-      if (project.mediaType === 'video') {
+      // If there's no media src, hide the media wrapper entirely
+      const mediaWrapper = mainImageEl.closest('.post-media-wrap');
+      if (!project.img) {
+        if (mediaWrapper) mediaWrapper.style.display = 'none';
+        else mainImageEl.style.display = 'none';
+      } else if (project.mediaType === 'video') {
         // sostituisci l'immagine con un video con controls
         const video = document.createElement('video');
         video.style.width = '100%';
@@ -177,9 +187,15 @@
           source = document.createElement('source');
           mainVideo.appendChild(source);
         }
-        source.src = project.img;
-        source.type = 'video/mp4';
-        try { mainVideo.load(); } catch(_) {}
+        if (project.img) {
+          source.src = project.img;
+          source.type = 'video/mp4';
+          try { mainVideo.load(); } catch(_) {}
+        } else {
+          // no media -> hide video wrapper if possible
+          const wrap = mainVideo.closest('.post-media-wrap') || mainVideo.parentElement;
+          if (wrap) wrap.style.display = 'none';
+        }
       }
     }
 
@@ -308,14 +324,22 @@
     const label = document.getElementById('project-embed-label');
     if (!section || !iframe || !link || !label) return;
     const e = project && project.embed;
-    if (e && e.url) {
-      iframe.src = e.url;
-      link.href = e.url;
-      label.textContent = e.label || 'Apri a schermo intero';
+
+    // Support both object { url, label } and plain string URL
+    const embedUrl = (typeof e === 'string') ? e : (e && e.url);
+    const embedLabel = (e && e.label) ? e.label : 'Apri a schermo intero';
+
+    if (embedUrl) {
+      // Ensure section is visible when we have a valid URL
       section.style.display = '';
+      iframe.src = embedUrl;
+      link.href = embedUrl;
+      label.textContent = embedLabel;
     } else {
+      // Hide the whole section if no embed provided for this project
       section.style.display = 'none';
-      iframe.removeAttribute('src');
+      try { iframe.removeAttribute('src'); } catch (_) {}
+      link.removeAttribute('href');
     }
   }
 
@@ -353,13 +377,11 @@
       col.innerHTML = `
         <div class="portfolio-wrap">
           <img src="${imgUrl}" class="img-fluid" alt="${project.title} ${index + 1}">
-          <div class="portfolio-info">
-            <h4>${project.title}</h4>
-            <p>Galleria</p>
-            <div class="portfolio-links">
-              <a href="${imgUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
+          <a href="${imgUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox portfolio-info-link" aria-label="Apri immagine ${index + 1}">
+            <div class="portfolio-info">
+              <h4>${project.title}</h4>
             </div>
-          </div>
+          </a>
         </div>
       `;
       galleryContainer.appendChild(col);

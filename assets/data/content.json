@@ -31,7 +31,7 @@
           "description": "Testo personalizzato About per il progetto 1",
           "longDescription": "Testo personalizzato About per il progetto 1",
           "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum.",
-          "embed": { "url": "torremanfriapulita.html", "label": "Apri a schermo intero" },
+          "embed": { "url": "torreManfriaPulita.html", "label": "Apri a schermo intero"},
           "caseStudy": {
             "overview": "Obiettivo: trasformare un concept 2D in un modello 3D di produzione con topologia pulita e materiali fisicamente corretti.",
             "goals": [

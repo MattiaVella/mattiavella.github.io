@@ -18,6 +18,12 @@ body {
   color: #f0f0f0;  
 }
 
+/* Global: round corners for all images to match embedded preview */
+img { border-radius: 12px; }
+
+/* Shared radius for thumbnails */
+:root { --thumb-radius: 12px; }
+
 a {
   color: #0563bb;
   text-decoration: none;
@@ -497,6 +503,18 @@ section {
   .before-after { aspect-ratio: 4 / 3; }
   .before-after .ba-grip { width: 48px; height: 48px; }
 }
+
+/* Embedded preview wrapper: align sizing/padding with before-after */
+.embed-wrap {
+  display: block;
+  width: 100%;
+  max-width: 1200px; /* match .before-after */
+  margin: 0 auto;    /* center like .before-after */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0f0f0f;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
 /*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
@@ -692,17 +710,38 @@ section {
   overflow: hidden;
   z-index: 1;
   background: rgba(69, 80, 91, 0.8);
+  border-radius: var(--thumb-radius);
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 }
+.portfolio .portfolio-wrap img,
+.portfolio .portfolio-wrap video { display:block; width:100%; height:auto; border-radius: inherit; }
 .portfolio .portfolio-wrap::before {
   content: "";
-  /*Hover delle immagini nella galleria*/
-  background: rgba(255, 255, 255, 0.8);
-  background: linear-gradient(0deg, #181818 0%, rgba(0,0,0,0) 100%);
+  /* Hover overlay */
+  background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.0) 100%);
   position: absolute;
-
-  transition:  0.3s;
-  
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
   opacity: 0;
+}
+/* Mobile tap hint */
+.portfolio .portfolio-wrap::after {
+  content: "Tocca per aprire";
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 5;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px;
+  color: #0e141b;
+  background: rgba(255,255,255,0.92);
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  opacity: 0;
+  transition: opacity .3s ease;
 }
 .portfolio .portfolio-wrap .portfolio-info {
   opacity: 0;
@@ -718,6 +757,7 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  pointer-events: none; /* allow full-tile link to receive clicks */
 }
 .portfolio .portfolio-wrap .portfolio-info::before {
   display: block;
@@ -771,6 +811,17 @@ section {
 .portfolio .portfolio-wrap .portfolio-links a:hover {
   color: #148af9;
 }
+.portfolio .portfolio-wrap a.portfolio-info-link {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border-radius: inherit;
+  display: block;
+}
+.portfolio .portfolio-wrap a.portfolio-info-link:focus-visible {
+  outline: 3px solid rgba(20,138,249,.9);
+  outline-offset: -3px;
+}
 .portfolio .portfolio-wrap:hover::before {
   top: 0;
   left: 0;
@@ -788,6 +839,22 @@ section {
 .portfolio .portfolio-wrap:hover .portfolio-info::after {
   bottom: 15px;
   right: 15px;
+}
+
+/* On touch devices, always show a subtle hint and keep overlay slightly visible */
+@media (hover: none), (pointer: coarse) {
+  .portfolio .portfolio-wrap::before { opacity: 0.25; }
+  .portfolio .portfolio-wrap::after { opacity: 1; }
+}
+
+/* Mobile homepage: keep portfolio overlay and frame always visible */
+@media (max-width: 991.98px) {
+  body.home .portfolio .portfolio-wrap::before { opacity: 1 !important; }
+  body.home .portfolio .portfolio-wrap .portfolio-info { opacity: 1 !important; }
+  body.home .portfolio .portfolio-wrap .portfolio-info::before { top: 15px; left: 15px; }
+  body.home .portfolio .portfolio-wrap .portfolio-info::after { bottom: 15px; right: 15px; }
+  /* Optional: hide the "tap to open" pill since overlay is already visible */
+  body.home .portfolio .portfolio-wrap::after { opacity: 0 !important; }
 }
 
 /*--------------------------------------------------------------
