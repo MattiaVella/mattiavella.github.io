@@ -237,6 +237,14 @@
     }
 
     // Links
+    // Case Study deep-link
+    const csBtn = document.getElementById('case-study-link');
+    if (csBtn && project && project.id != null) {
+      csBtn.href = `case-studies.html#cs-${project.id}`;
+      csBtn.style.display = '';
+    } else if (csBtn) {
+      csBtn.style.display = 'none';
+    }
     const linksRow = document.getElementById('project-links');
     if (linksRow) {
       linksRow.innerHTML = '';

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Case Studies • Mattia Vella</title>
+  <meta name="description" content="Selezione di case study approfonditi: processo, strumenti, gallerie e link dei progetti di Mattia Vella.">
+  <meta name="keywords" content="case study, 3d, archiviz, render, animation, portfolio">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- Header -->
+  <header id="header" class="d-flex flex-column justify-content-center">
+    <nav id="navbar" class="navbar nav-menu">
+      <ul>
+        <li><a href="index.html#hero" class="nav-link"><i class="bx bx-home"></i> <span>Home</span></a></li>
+        <li><a href="index.html#portfolio" class="nav-link"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
+        <li><a href="#main" class="nav-link scrollto active"><i class="bx bx-detail"></i> <span>Case Studies</span></a></li>
+        <li><a href="index.html#services" class="nav-link"><i class="bx bx-server"></i> <span>Servizi</span></a></li>
+        <li><a href="index.html#contact" class="nav-link"><i class="bx bx-envelope"></i> <span>Contatti</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Page Title -->
+    <section class="section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Case Studies</h2>
+          <p>Una selezione di progetti raccontati nel dettaglio: contesto, ruolo, strumenti e risultati.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies List -->
+    <section id="case-studies" class="about">
+      <div class="container" id="case-studies-container" data-aos="fade-up">
+        <!-- Cards generate here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <h3>Mattia Vella</h3>
+      <div class="copyright">
+        &copy; <span id="year"></span> <strong><span>Mattia Vella</span></strong>. Tutti i diritti riservati.
+      </div>
+    </div>
+  </footer>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Main JS -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Case Studies bootstrapping (fetch content.json and render) -->
+  <script>
+    (function () {
+      'use strict';
+
+      const $ = (sel, root = document) => root.querySelector(sel);
+      const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+      async function getContent() {
+        try {
+          const res = await fetch('assets/data/content.json', { cache: 'no-cache' });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return await res.json();
+        } catch (e) {
+          console.error('[case-studies] content.json non caricato:', e);
+          return null;
+        }
+      }
+
+      function metaList(meta) {
+        if (!meta) return '';
+        const parts = [];
+        if (meta.client) parts.push(`<li class="list-inline-item me-3"><i class="bi bi-building me-1"></i>${meta.client}</li>`);
+        if (meta.role) parts.push(`<li class="list-inline-item me-3"><i class="bi bi-person-badge me-1"></i>${meta.role}</li>`);
+        if (meta.date) parts.push(`<li class="list-inline-item me-3"><i class="bi bi-calendar-event me-1"></i>${meta.date}</li>`);
+        if (Array.isArray(meta.tags) && meta.tags.length) {
+          parts.push(`<li class="list-inline-item">${meta.tags.map(t => `<span class="badge rounded-pill bg-secondary-subtle text-secondary me-1">${t}</span>`).join('')}</li>`);
+        }
+        return parts.join('');
+      }
+
+      function mediaBlock(item) {
+        const alt = (item.title || 'Media');
+        if (item.media && item.media.type === 'video') {
+          return `
+            <div class="ratio ratio-16x9 mb-3">
+              <video controls preload="metadata">
+                <source src="${item.media.src}" type="video/mp4">
+              </video>
+            </div>
+          `;
+        }
+        const src = item.media && item.media.src ? item.media.src : '';
+        return `<img src="${src}" alt="${alt}" class="img-fluid mb-3" loading="lazy">`;
+      }
+
+      function linksBlock(links) {
+        if (!Array.isArray(links) || !links.length) return '';
+        return `
+          <div class="row g-3 mt-1" id="project-links">
+            ${links.map(l => {
+              const icon = l.icon ? `bi ${l.icon}` : 'bi bi-link-45deg';
+              const label = l.label || l.url;
+              return `
+                <div class="col-12 col-sm-6 col-lg-4">
+                  <a class="card link-card h-100" href="${l.url}" target="_blank" rel="noopener">
+                    <div class="card-body d-flex align-items-center">
+                      <i class="${icon} me-1"></i><span>${label}</span>
+                    </div>
+                  </a>
+                </div>`;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      function galleryBlock(item) {
+        const gallery = Array.isArray(item.gallery) ? item.gallery : [];
+        if (!gallery.length) return '';
+        const gid = `cs-${item.id || Math.random().toString(36).slice(2)}`;
+        return `
+          <div class="portfolio section-bg mt-4">
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+              ${gallery.map((g, idx) => `
+                <div class="col-lg-4 col-md-6 portfolio-item ${item.category ? 'filter-' + item.category : ''}">
+                  <div class="portfolio-wrap">
+                    <img src="${g}" class="img-fluid" alt="${item.title} ${idx + 1}" loading="lazy">
+                    <div class="portfolio-info">
+                      <h4>${item.title}</h4>
+                      <p>Gallery</p>
+                      <div class="portfolio-links">
+                        <a href="${g}" data-gallery="${gid}" class="portfolio-lightbox" aria-label="Apri immagine"><i class="bx bx-plus"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      function csQuoteBlock(cs) {
+        if (!cs || !cs.heroQuote) return '';
+        return `
+          <figure class="mt-3">
+            <blockquote class="blockquote">
+              <p class="mb-0">“${cs.heroQuote}”</p>
+            </blockquote>
+          </figure>
+        `;
+      }
+
+      function csListSection(title, items, icon) {
+        if (!Array.isArray(items) || !items.length) return '';
+        const ico = icon ? `<i class="bi ${icon} me-1"></i>` : '';
+        return `
+          <div class="mb-3">
+            <h4 class="h6 text-uppercase text-secondary">${ico}${title}</h4>
+            <ul class="mb-0 ps-3">
+              ${items.map(i => `<li>${i}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      function csResultsGrid(results) {
+        if (!Array.isArray(results) || !results.length) return '';
+        return `
+          <div class="row g-3 mt-2">
+            ${results.map(r => `
+              <div class="col-6 col-md-4">
+                <div class="p-3 rounded-3 bg-dark border border-dark-subtle h-100">
+                  <div class="text-uppercase small text-secondary">${r.label || ''}</div>
+                  <div class="h4 mb-0">${r.value || ''}</div>
+                  ${r.caption ? `<div class="small text-muted">${r.caption}</div>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      function csTools(tags) {
+        if (!Array.isArray(tags) || !tags.length) return '';
+        return `
+          <div class="mt-3">
+            <h4 class="h6 text-uppercase text-secondary"><i class="bi bi-tools me-1"></i>Strumenti</h4>
+            <div>
+              ${tags.map(t => `<span class="badge rounded-pill bg-secondary-subtle text-secondary me-1">${t}</span>`).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      function renderCaseStudy(item) {
+        const longText = item.longDescription || item.aboutText || item.description || '';
+        const detailText = item.details || '';
+        const kicker = (item.meta && Array.isArray(item.meta.tags) && item.meta.tags[0]) || (item.category ? item.category : 'Project');
+        const cs = item.caseStudy || null;
+
+        return `
+          <article id="cs-${item.id || ''}" class="mb-5 pb-5 border-bottom border-dark-subtle" data-aos="fade-up">
+            <div class="row g-4 align-items-start">
+              <div class="col-12 col-lg-5">
+                <div class="text-muted small mb-2 text-uppercase">${kicker}</div>
+                <h2 class="h1 mb-2">${item.title || ''}</h2>
+                ${item.subtitle ? `<h3 class="h5 text-secondary mb-3">${item.subtitle}</h3>` : ''}
+                <ul class="list-inline mb-3">${metaList(item.meta)}</ul>
+                ${mediaBlock(item)}
+                ${linksBlock(item.links)}
+              </div>
+              <div class="col-12 col-lg-7">
+                ${cs && cs.overview ? `<p class="lead">${cs.overview}</p>` : (longText ? `<p class="lead">${longText}</p>` : '')}
+                ${csQuoteBlock(cs)}
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">${csListSection('Obiettivi', cs?.goals, 'bi-bullseye')}</div>
+                  <div class="col-12 col-md-6">${csListSection('Sfide', cs?.challenges, 'bi-exclamation-triangle')}</div>
+                </div>
+                ${csListSection('Soluzione', cs?.solution, 'bi-lightbulb')}
+                ${csResultsGrid(cs?.results)}
+                ${csTools(cs?.tools)}
+                ${!cs && detailText ? `<p>${detailText}</p>` : ''}
+                <div class="mt-3">
+                  <a class="btn btn-primary btn-sm" href="PortfolioPost.html?id=${item.id}"><i class="bi bi-journal-text me-1"></i> Vedi pagina dettagli</a>
+                </div>
+                ${galleryBlock(item)}
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      async function init() {
+        const mount = $('#case-studies-container');
+        const data = await getContent();
+        const items = data?.site?.portfolio?.items || [];
+        if (!items.length) {
+          mount.innerHTML = '<p style="color:#888">Nessun progetto disponibile.</p>';
+          return;
+        }
+        // Order by date desc if possible
+        items.sort((a,b) => {
+          const ad = (a.meta && a.meta.date) ? String(a.meta.date) : '';
+          const bd = (b.meta && b.meta.date) ? String(b.meta.date) : '';
+          return bd.localeCompare(ad);
+        });
+        mount.innerHTML = items.map(renderCaseStudy).join('');
+
+        // Init lightbox for galleries
+        try { GLightbox({ selector: '.portfolio-lightbox' }); } catch(_) {}
+        try { AOS.refresh(); } catch(_) {}
+      }
+
+      // Kickoff on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+
+</html>

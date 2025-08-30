@@ -31,6 +31,32 @@
           "description": "Testo personalizzato About per il progetto 1",
           "longDescription": "Testo personalizzato About per il progetto 1",
           "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum.",
+          "caseStudy": {
+            "overview": "Obiettivo: trasformare un concept 2D in un modello 3D di produzione con topologia pulita e materiali fisicamente corretti.",
+            "goals": [
+              "Ridurre del 30% il tempo di render rispetto a baseline",
+              "Ottimizzare il modello per animazioni future",
+              "Output in 4K con riflessioni realistiche"
+            ],
+            "challenges": [
+              "Reference incomplete e incoerenti",
+              "Gestione UV su superfici complesse",
+              "Bilanciare qualità/tempo di rendering"
+            ],
+            "solution": [
+              "Blockout in low-poly e validazione silhouette",
+              "Retopology guidata da loop per deformazioni pulite",
+              "Shader PBR con mappe generate in Substance",
+              "Lighting three-point e denoise ottimizzato"
+            ],
+            "results": [
+              { "label": "Tempo Render", "value": "-35%", "caption": "vs baseline" },
+              { "label": "Poligoni", "value": "120k", "caption": "ottimizzati" },
+              { "label": "Output", "value": "3840×2160", "caption": "4K PNG" }
+            ],
+            "tools": ["Blender", "Substance 3D Painter", "Cycles", "Photoshop"],
+            "heroQuote": "La qualità nasce dall'intenzione: pulizia, materiali coerenti e luci credibili."
+          },
           "beforeAfter": {
             "before": "assets/img/img1-1.jpg",
             "after": "assets/img/img1-2.jpg"
@@ -65,6 +91,31 @@
           "description": "Testo personalizzato About per il progetto 2",
           "longDescription": "Testo personalizzato About per il progetto 2",
           "details": "Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!",
+          "caseStudy": {
+            "overview": "Render fotorealistico di un interno residenziale focalizzato su luce naturale e mood serale.",
+            "goals": [
+              "Moodboard condivisa con il cliente",
+              "Illuminazione HDRI + portal lights",
+              "Consegna di 3 inquadrature key in 48h"
+            ],
+            "challenges": [
+              "Materiali legno credibili senza ripetizioni",
+              "Gestione noise alle basse luci",
+              "Post-produzione minima per tempi stretti"
+            ],
+            "solution": [
+              "Creazione tileables personalizzati con map range",
+              "Lightmix e denoise per canali separati",
+              "Color grading leggero in post"
+            ],
+            "results": [
+              { "label": "Views", "value": "3", "caption": "final render" },
+              { "label": "Delivery", "value": "48h", "caption": "consegna" },
+              { "label": "Revisioni", "value": "1", "caption": "ciclo" }
+            ],
+            "tools": ["Blender", "Cycles", "HDRI Haven", "Photoshop"],
+            "heroQuote": "La luce racconta lo spazio: progettare le ombre è metà del lavoro."
+          },
           "meta": {
             "client": "Studio XYZ",
             "date": "2024",
