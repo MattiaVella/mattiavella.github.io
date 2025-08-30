@@ -261,4 +261,12 @@
     })
   });
 
+  // Contact form removed: no JS handler needed.
+
 })()
+
+// Footer dynamic year
+(() => {
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+})();

@@ -1,6 +1,12 @@
 {
   "site": {
     "title": "Mattia Vella",
+    "contact": {
+      "location": "Torino, Italia",
+      "locationUrl": "https://maps.google.com/?q=Torino, Italia",
+      "email": "email@example.com",
+      "phone": "+39 000 000 000"
+    },
     "social": {
       "facebook": "#",
       "instagram": "#",
@@ -17,14 +23,18 @@
       "items": [
         {
           "id": 1,
-          "filter": "filter-model",
-          "kind": "Post",
+          "category": "model",
+          "contentType": "Post",
           "media": { "type": "image", "src": "assets/img/img1.jpg" },
           "title": "ESEMPIO PROGETTO",
           "subtitle": "Modellazione 3D",
-          "about": "Testo personalizzato About per il progetto 1",
-          "aboutText": "Testo personalizzato About per il progetto 1",
-          "dynamicParagraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum.",
+          "description": "Testo personalizzato About per il progetto 1",
+          "longDescription": "Testo personalizzato About per il progetto 1",
+          "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum.",
+          "beforeAfter": {
+            "before": "assets/img/img1-1.jpg",
+            "after": "assets/img/img1-2.jpg"
+          },
           "meta": {
             "client": "Cliente Demo",
             "date": "2025",
@@ -36,7 +46,8 @@
             { "label": "Repository", "url": "https://github.com/", "icon": "bi-github" }
           ],
           "collaborators": [
-            { "name": "Nome Collaboratore", "role": "Concept Artist", "url": "https://instagram.com/" }
+            { "name": "Nome Collaboratore", "role": "Concept Artist", "url": "https://instagram.com/" },
+            { "name": "Nome Collaboratore 2", "role": "3D Modeler", "url": "https://instagram.com/" }
           ],
           "gallery": [
             "assets/img/img1-1.jpg",
@@ -46,14 +57,14 @@
         },
         {
           "id": 2,
-          "filter": "filter-archiviz",
-          "kind": "Work",
+          "category": "archiviz",
+          "contentType": "Work",
           "media": { "type": "image", "src": "assets/img/img2.jpg" },
           "title": "Archiviz Example",
           "subtitle": "Visualizzazione Architettonica",
-          "about": "Testo personalizzato About per il progetto 2",
-          "aboutText": "Testo personalizzato About per il progetto 2",
-          "dynamicParagraph": "Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!",
+          "description": "Testo personalizzato About per il progetto 2",
+          "longDescription": "Testo personalizzato About per il progetto 2",
+          "details": "Questo è un paragrafo dinamico per il progetto 2. Anche questo testo è modificabile!",
           "meta": {
             "client": "Studio XYZ",
             "date": "2024",
