@@ -132,6 +132,26 @@
             "assets/img/img2-1.webp",
             "assets/img/img2-2.webp"
           ]
+        },
+        {
+          "id": 3,
+          "category": "video",
+          "contentType": "Video",
+          "media": { "type": "video", "src": "assets/images/render2.mp4" },
+          "title": "Progetto video",
+          "subtitle": "In arrivo",
+          "description": "Spazio riservato al primo lavoro video pubblicabile.",
+          "details": "Segnaposto: sostituire con un progetto vero."
+        },
+        {
+          "id": 4,
+          "category": "ai",
+          "contentType": "Post",
+          "media": { "type": "image", "src": "assets/img/img2-3.webp" },
+          "title": "Progetto AI",
+          "subtitle": "In arrivo",
+          "description": "Spazio riservato al primo contenuto generato con AI.",
+          "details": "Segnaposto: sostituire con un progetto vero."
         }
       ]
     }
