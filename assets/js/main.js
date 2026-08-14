@@ -145,9 +145,9 @@
     new Typed('.typed', {
       strings: typed_strings,
       loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
+      typeSpeed: 45,
+      backSpeed: 25,
+      backDelay: 1400
     });
   }
 
@@ -174,9 +174,17 @@
   window.addEventListener('load', () => {
     let portfolioContainer = select('.portfolio-container');
     if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item'
-      });
+      // Una sola istanza Isotope, condivisa con portfolio.js: crearne una
+      // seconda sullo stesso contenitore fa si' che le due si sovrascrivano a
+      // vicenda e il filtro smetta di avere effetto (calcola il risultato
+      // giusto, poi l'altra istanza rimette tutte le card visibili).
+      let portfolioIsotope = window._portfolioIsotope;
+      if (!portfolioIsotope) {
+        portfolioIsotope = new Isotope(portfolioContainer, {
+          itemSelector: '.portfolio-item'
+        });
+        window._portfolioIsotope = portfolioIsotope;
+      }
 
       let portfolioFilters = select('#portfolio-flters li', true);
 

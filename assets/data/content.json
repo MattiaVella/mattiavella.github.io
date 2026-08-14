@@ -15,15 +15,14 @@
     "portfolio": {
       "filters": [
         { "label": "All", "filter": "*" },
-        { "label": "3D model", "filter": ".filter-model" },
-        { "label": "Archiviz", "filter": ".filter-archiviz" },
-        { "label": "Render", "filter": ".filter-render" },
-        { "label": "Animation", "filter": ".filter-animation" }
+        { "label": "Video", "filter": ".filter-video" },
+        { "label": "AI", "filter": ".filter-ai" },
+        { "label": "3D", "filter": ".filter-3d" }
       ],
       "items": [
         {
           "id": 1,
-          "category": "model",
+          "category": "3d",
           "contentType": "Post",
           "media": { "type": "image", "src": "assets/img/img1.webp" },
           "title": "ESEMPIO PROGETTO",
@@ -84,7 +83,7 @@
         },
         {
           "id": 2,
-          "category": "archiviz",
+          "category": "3d",
           "contentType": "Work",
           "media": { "type": "image", "src": "assets/img/img2.webp" },
           "title": "Archiviz Example",

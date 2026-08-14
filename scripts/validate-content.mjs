@@ -169,12 +169,17 @@ async function main() {
     validateItem(item || {}, i, validCategories);
   });
 
-  // Categorie dichiarate tra i filtri ma senza nessun progetto: filtro vuoto.
+  // Categorie dichiarate ma ancora senza progetti: il filtro non viene mostrato
+  // (portfolio.js nasconde le voci vuote), quindi e' solo un promemoria.
+  const catUsate = validCategories.filter(cat => items.some(it => it && it.category === cat));
   validCategories.forEach(cat => {
-    if (!items.some(it => it && it.category === cat)) {
-      warn(`filtro "${cat}"`, 'nessun progetto in questa categoria: il filtro non mostrera\' nulla');
+    if (!catUsate.includes(cat)) {
+      warn(`filtro "${cat}"`, 'ancora nessun progetto: la voce resta nascosta finche\' non ne aggiungi uno');
     }
   });
+  if (catUsate.length === 1) {
+    warn('filtri', `un'unica categoria in uso ("${catUsate[0]}"): la barra dei filtri resta nascosta`);
+  }
 
   console.log(`Controllati ${items.length} progetti.\n`);
 

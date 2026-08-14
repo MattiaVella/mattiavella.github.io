@@ -46,16 +46,39 @@
   return `PortfolioPost.html?id=${item.id}`;
   }
 
-  function populateFilters(filters) {
+  /**
+   * Mostra solo i filtri che hanno almeno un progetto.
+   *
+   * Una categoria dichiarata ma vuota apre una griglia bianca, e con una sola
+   * categoria il filtro non filtra niente: in quel caso la barra sparisce del
+   * tutto. Cosi' le voci si accendono da sole man mano che il portfolio cresce,
+   * senza dover ricordarsi di aggiornare l'elenco.
+   */
+  function populateFilters(filters, items) {
     const ul = $('#portfolio-flters');
     if (!ul) return;
+
+    const used = new Set((items || []).map(it => it.type).filter(Boolean));
+    const usable = (filters || []).filter(f =>
+      f && typeof f.filter === 'string' && f.filter !== '*' &&
+      used.has(f.filter.replace(/^\./, ''))
+    );
+
     ul.innerHTML = '';
+
+    if (usable.length < 2) {
+      ul.style.display = 'none';
+      return;
+    }
+    ul.style.display = '';
+
     const base = document.createElement('li');
     base.textContent = 'All';
     base.dataset.filter = '*';
     base.className = 'filter-active';
     ul.appendChild(base);
-    (filters || []).filter(f => f.filter !== '*').forEach(f => {
+
+    usable.forEach(f => {
       const li = document.createElement('li');
       li.textContent = f.label;
       li.dataset.filter = f.filter;
@@ -197,7 +220,7 @@
     const descEl = document.getElementById('portfolio-description');
     if (descEl) descEl.textContent = project ? (project.subtitle || '') : '';
 
-    if (project && project.title) document.title = project.title + ' - Portfolio Details';
+    if (project && project.title) document.title = project.title + ' - Mattia Vella';
 
     // Sottotitolo
     const subtitleEl = document.getElementById('dynamic-subtitle');
@@ -513,7 +536,7 @@
     }));
 
     // Home
-    populateFilters(content?.site?.portfolio?.filters || []);
+    populateFilters(content?.site?.portfolio?.filters || [], items);
   populateIndex(items);
   initIsotopeAndFiltersIfNeeded();
 
