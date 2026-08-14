@@ -20,6 +20,23 @@
             "phone": { "type": "string" }
           }
         },
+        "about": {
+          "type": "object",
+          "description": "Bio mostrata accanto ai contatti. Senza paragrafi la colonna non viene mostrata.",
+          "properties": {
+            "title": { "type": "string", "default": "Chi sono" },
+            "paragraphs": {
+              "type": "array",
+              "description": "Un elemento per paragrafo.",
+              "items": { "type": "string" }
+            },
+            "skills": {
+              "type": "array",
+              "description": "Etichette mostrate come pillole sotto il testo.",
+              "items": { "type": "string" }
+            }
+          }
+        },
         "social": {
           "type": "object",
           "description": "URL completi. Il valore \"#\" significa link non impostato.",

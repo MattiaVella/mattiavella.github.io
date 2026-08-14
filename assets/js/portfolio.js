@@ -499,6 +499,28 @@
     setHref('instagram', social.instagram);
     setHref('linkedin', social.linkedin);
 
+    // Bio (site.about): titolo, paragrafi e competenze.
+    const about = site.about || null;
+    const aboutTitle = document.getElementById('about-title');
+    const aboutText = document.getElementById('about-text');
+    const aboutSkills = document.getElementById('about-skills');
+    if (aboutText) {
+      const paragrafi = (about && Array.isArray(about.paragraphs)) ? about.paragraphs.filter(Boolean) : [];
+      const competenze = (about && Array.isArray(about.skills)) ? about.skills.filter(Boolean) : [];
+
+      if (aboutTitle && about && about.title) aboutTitle.textContent = about.title;
+      aboutText.innerHTML = paragrafi.map(p => `<p>${esc(p)}</p>`).join('');
+      if (aboutSkills) {
+        aboutSkills.innerHTML = competenze.map(s => `<li>${esc(s)}</li>`).join('');
+        aboutSkills.style.display = competenze.length ? '' : 'none';
+      }
+
+      // Senza testo la colonna resterebbe una card vuota accanto ai contatti.
+      const card = aboutText.closest('.about-card');
+      const colonna = card ? card.closest('[class*="col-"]') : null;
+      if (colonna) colonna.style.display = paragrafi.length ? '' : 'none';
+    }
+
     // Contatti dinamici
     const contact = site.contact || {};
     const locVal = document.getElementById('contact-location-value');

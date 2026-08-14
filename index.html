@@ -127,52 +127,62 @@
         <h2>Contatti</h2>
       </div>
 
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-10">
+      <div class="row g-4 justify-content-center align-items-stretch">
+
+        <!-- Bio: testo e competenze arrivano da site.about in content.json -->
+        <div class="col-12 col-lg-7" data-aos="fade-up" data-aos-delay="100">
+          <div class="about-card h-100">
+            <h3 id="about-title" class="about-title">Chi sono</h3>
+            <div id="about-text" class="about-text"></div>
+            <ul id="about-skills" class="about-skills"></ul>
+          </div>
+        </div>
+
+        <!-- Recapiti -->
+        <div class="col-12 col-lg-5" data-aos="fade-up" data-aos-delay="200">
+          <div class="contact-card h-100">
             <div class="contact-header text-center">
               <span class="badge-remote">Disponibile da remoto</span>
             </div>
 
-            <hr class="section-divider" />
-
-            <div class="row g-4 contact-items mt-1 mt-md-2">
-        <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
-        <a id="contact-location-link" class="contact-item text-decoration-none" href="https://maps.google.com/?q=Torino, Italia" target="_blank" rel="noopener" aria-label="Apri mappa per Torino, Italia">
+            <div class="row g-3 contact-items mt-1">
+              <div class="col-12">
+                <a id="contact-location-link" class="contact-item text-decoration-none" href="https://maps.google.com/?q=Torino, Italia" target="_blank" rel="noopener" aria-label="Apri mappa per Torino, Italia">
                   <span class="contact-icon"><i class="bi bi-geo-alt"></i></span>
                   <div>
                     <div class="contact-label">Località</div>
-          <div id="contact-location-value" class="contact-value">Torino, Italia</div>
+                    <div id="contact-location-value" class="contact-value">Torino, Italia</div>
                   </div>
                 </a>
               </div>
-              <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="200">
-        <a id="contact-email-link" class="contact-item text-decoration-none" href="mailto:email@example.com" aria-label="Scrivi a email@example.com">
+              <div class="col-12">
+                <a id="contact-email-link" class="contact-item text-decoration-none" href="mailto:email@example.com" aria-label="Scrivi a email@example.com">
                   <span class="contact-icon"><i class="bi bi-envelope"></i></span>
                   <div>
                     <div class="contact-label">Email</div>
-          <div id="contact-email-value" class="contact-value">email@example.com</div>
+                    <div id="contact-email-value" class="contact-value">email@example.com</div>
                   </div>
                 </a>
               </div>
-              <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="300">
-        <a id="contact-phone-link" class="contact-item text-decoration-none" href="tel:+39000000000" aria-label="Chiama +39 000 000 000">
+              <div class="col-12">
+                <a id="contact-phone-link" class="contact-item text-decoration-none" href="tel:+39000000000" aria-label="Chiama +39 000 000 000">
                   <span class="contact-icon"><i class="bi bi-phone"></i></span>
                   <div>
                     <div class="contact-label">Telefono</div>
-          <div id="contact-phone-value" class="contact-value">+39 000 000 000</div>
+                    <div id="contact-phone-value" class="contact-value">+39 000 000 000</div>
                   </div>
                 </a>
               </div>
             </div>
 
-            
-
-            <div class="contact-social text-center mt-3" data-aos="fade-up" data-aos-delay="150">
+            <div class="contact-social text-center mt-4">
               <a href="#" class="social-btn facebook" aria-label="Facebook"><i class="bx bxl-facebook"></i></a>
               <a href="#" class="social-btn instagram" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
               <a href="#" class="social-btn linkedin" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
             </div>
+          </div>
         </div>
+
       </div>
 
     </div>

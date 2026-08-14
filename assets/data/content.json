@@ -6,6 +6,22 @@
       "locationUrl": "https://maps.google.com/?q=Torino, Italia",
       "email": "mattiavella14@gmail.com"
     },
+    "about": {
+      "title": "Chi sono",
+      "paragraphs": [
+        "Videomaker e 3D artist, con base a Torino. Lavoro come freelance con partita IVA, soprattutto con aziende: contenuti social, video promozionali e istituzionali, seguiti dalla ripresa al montaggio.",
+        "Sono laureato in Ingegneria del Cinema e dei Mezzi di Comunicazione al Politecnico di Torino, un percorso in cui la parte tecnica e quella produttiva vanno di pari passo. Da li' arriva anche il lavoro su cortometraggi, esperienze transmediali, videogiochi ed esperienze immersive a 360 gradi, spesso in gruppo e su progetti articolati.",
+        "Oggi mi sto specializzando su due fronti: i contenuti video generati con AI e il gaussian splatting, una tecnica di scansione che trasforma oggetti e luoghi reali in modelli esplorabili in modo interattivo. E' l'evoluzione naturale del lavoro sulle tecnologie immersive, con applicazioni che vanno dagli allestimenti museali alla presentazione di prodotto. Accanto a questi continuo a occuparmi di modellazione e render 3D."
+      ],
+      "skills": [
+        "Video aziendali",
+        "Montaggio",
+        "Video AI",
+        "Gaussian splatting",
+        "Modellazione 3D",
+        "Esperienze immersive"
+      ]
+    },
     "social": {
       "facebook": "#",
       "instagram": "https://www.instagram.com/mattia_vella/",
