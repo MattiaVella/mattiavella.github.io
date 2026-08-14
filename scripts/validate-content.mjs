@@ -145,6 +145,24 @@ async function main() {
   if (contact.phone && /^\+?39?0+$/.test(String(contact.phone).replace(/[\s\-().]/g, ''))) {
     warn('site.contact.phone', `ancora un segnaposto ("${contact.phone}")`);
   }
+  // La partita IVA ha una cifra di controllo: un refuso si vede subito.
+  if (contact.vat) {
+    const piva = String(contact.vat).replace(/^IT/i, '').replace(/\s/g, '');
+    if (!/^\d{11}$/.test(piva)) {
+      err('site.contact.vat', `"${contact.vat}" non ha 11 cifre`);
+    } else {
+      let somma = 0;
+      for (let i = 0; i < 10; i++) {
+        let d = Number(piva[i]);
+        if (i % 2 === 1) { d *= 2; if (d > 9) d -= 9; }
+        somma += d;
+      }
+      if ((10 - (somma % 10)) % 10 !== Number(piva[10])) {
+        err('site.contact.vat', `"${contact.vat}" ha una cifra di controllo errata: probabile refuso`);
+      }
+    }
+  }
+
   Object.entries(site.social || {}).forEach(([rete, url]) => {
     if (!url || url === '#') warn(`site.social.${rete}`, 'link non impostato (punta a "#")');
   });
