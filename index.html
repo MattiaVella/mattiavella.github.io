@@ -56,8 +56,10 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex flex-column justify-content-center">
     <!-- La sorgente viene scelta da main.js in base alla larghezza schermo e al
-         risparmio dati: mobile riceve Video_Mobile.mp4 (1,6 MB) invece di 39 MB. -->
+         risparmio dati: mobile riceve Video_Mobile.mp4 (1,5 MB) invece di 3,9 MB.
+         Il poster copre l'attesa con 10 KB invece di uno schermo vuoto. -->
     <video id="myVideo" muted loop playsinline autoplay preload="none"
+           poster="assets/img/hero-poster.webp"
            data-src-mobile="assets/Video/Video_Mobile.mp4"
            data-src-desktop="assets/Video/Video.mp4"
            aria-hidden="true" tabindex="-1"></video>

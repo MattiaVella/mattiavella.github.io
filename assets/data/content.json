@@ -25,7 +25,7 @@
           "id": 1,
           "category": "model",
           "contentType": "Post",
-          "media": { "type": "image", "src": "assets/img/img1.jpg" },
+          "media": { "type": "image", "src": "assets/img/img1.webp" },
           "title": "ESEMPIO PROGETTO",
           "subtitle": "Modellazione 3D",
           "description": "Testo personalizzato About per il progetto 1",
@@ -59,8 +59,8 @@
             "heroQuote": "La qualità nasce dall'intenzione: pulizia, materiali coerenti e luci credibili."
           },
           "beforeAfter": {
-            "before": "assets/img/img1-1.jpg",
-            "after": "assets/img/img1-2.jpg"
+            "before": "assets/img/img1-1.webp",
+            "after": "assets/img/img1-2.webp"
           },
           "meta": {
             "client": "Cliente Demo",
@@ -77,16 +77,16 @@
             { "name": "Nome Collaboratore 2", "role": "3D Modeler", "url": "https://instagram.com/" }
           ],
           "gallery": [
-            "assets/img/img1-1.jpg",
-            "assets/img/img1-2.jpg",
-            "assets/img/img1-3.jpg"
+            "assets/img/img1-1.webp",
+            "assets/img/img1-2.webp",
+            "assets/img/img1-3.webp"
           ]
         },
         {
           "id": 2,
           "category": "archiviz",
           "contentType": "Work",
-          "media": { "type": "image", "src": "assets/img/img2.jpg" },
+          "media": { "type": "image", "src": "assets/img/img2.webp" },
           "title": "Archiviz Example",
           "subtitle": "Visualizzazione Architettonica",
           "description": "Testo personalizzato About per il progetto 2",
@@ -130,8 +130,8 @@
             { "name": "Nome Collaboratore 2", "role": "Architect" }
           ],
           "gallery": [
-            "assets/img/img2-1.jpg",
-            "assets/img/img2-2.jpg"
+            "assets/img/img2-1.webp",
+            "assets/img/img2-2.webp"
           ]
         }
       ]

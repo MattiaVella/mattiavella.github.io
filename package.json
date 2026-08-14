@@ -1,0 +1,14 @@
+{
+  "name": "mattiavella-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio 3D di Mattia Vella, pubblicato su GitHub Pages.",
+  "type": "module",
+  "scripts": {
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "optimize:images:force": "node scripts/optimize-images.mjs --force"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
