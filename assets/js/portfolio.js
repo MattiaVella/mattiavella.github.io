@@ -548,10 +548,14 @@
       phoneLink.setAttribute('aria-label', 'Chiama ' + contact.phone);
     }
 
+    const vatItem = document.getElementById('contact-vat-item');
+    const vatVal = document.getElementById('contact-vat-value');
+    if (contact.vat && vatVal) vatVal.textContent = contact.vat;
+
     // Un contatto assente da content.json sparisce dalla pagina, invece di
     // lasciare in vista il segnaposto scritto nell'HTML.
     let nascosti = 0;
-    [[locLink, contact.location], [emailLink, contact.email], [phoneLink, contact.phone]]
+    [[locLink, contact.location], [emailLink, contact.email], [phoneLink, contact.phone], [vatItem, contact.vat]]
       .forEach(([link, valore]) => {
         if (!link) return;
         const box = link.closest('[class*="col-"]') || link;
