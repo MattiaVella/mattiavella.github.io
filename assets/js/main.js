@@ -263,10 +263,52 @@
 
   // Contact form removed: no JS handler needed.
 
-})()
+})();
 
 // Footer dynamic year
 (() => {
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+})();
+
+/**
+ * Hero video: sorgente adattiva.
+ * Il markup non ha <source>: lo aggiunge qui in base a schermo e rete, così il
+ * browser non scarica mai il file pesante quando non serve.
+ */
+(() => {
+  const video = document.getElementById('myVideo');
+  if (!video) return;
+
+  const mobileSrc = video.dataset.srcMobile;
+  const desktopSrc = video.dataset.srcDesktop;
+  if (!mobileSrc && !desktopSrc) return;
+
+  const conn = navigator.connection || navigator.webkitConnection || {};
+  const saveData = conn.saveData === true;
+  const slowNetwork = /(^|-)2g$/.test(conn.effectiveType || '');
+  const smallScreen = window.matchMedia('(max-width: 992px)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const useLight = saveData || slowNetwork || smallScreen;
+  const src = useLight ? (mobileSrc || desktopSrc) : (desktopSrc || mobileSrc);
+
+  if (reduceMotion) {
+    // Chi ha chiesto meno animazioni vede il primo fotogramma, non il loop.
+    video.removeAttribute('autoplay');
+    video.autoplay = false;
+    video.addEventListener('loadeddata', () => video.pause(), { once: true });
+  }
+
+  const source = document.createElement('source');
+  source.type = 'video/mp4';
+  source.src = src;
+  video.appendChild(source);
+  video.preload = 'auto';
+  video.load();
+
+  if (!reduceMotion) {
+    const played = video.play();
+    if (played && typeof played.catch === 'function') played.catch(() => {});
+  }
 })();

@@ -6,6 +6,55 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+  // Evita che virgolette o < nei testi di content.json rompano l'HTML generato.
+  const esc = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+  // Isotope posiziona gli item misurandone l'altezza: con le immagini lazy
+  // l'altezza è 0 al primo layout, quindi va ricalcolato a ogni load.
+  function relayoutIsotope() {
+    try {
+      if (window._portfolioIsotope) window._portfolioIsotope.layout();
+    } catch (_) {}
+  }
+
+  function wireLazyMedia(container) {
+    if (!container) return;
+
+    $$('img', container).forEach(img => {
+      if (img.complete) return;
+      img.addEventListener('load', relayoutIsotope, { once: true });
+      img.addEventListener('error', relayoutIsotope, { once: true });
+    });
+
+    // I video partono solo quando entrano nel viewport: evita di scaricare
+    // decine di MB per clip che l'utente potrebbe non vedere mai.
+    const videos = $$('video[data-autoplay-inview]', container);
+    if (!videos.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      videos.forEach(v => { try { v.play().catch(() => {}); } catch (_) {} });
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const v = entry.target;
+        if (entry.isIntersecting) {
+          try { const p = v.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+        } else {
+          try { v.pause(); } catch (_) {}
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+
+    videos.forEach(v => {
+      v.addEventListener('loadeddata', relayoutIsotope, { once: true });
+      io.observe(v);
+    });
+  }
+
   async function loadContent() {
     if (window.__contentJSON) return window.__contentJSON;
     try {
@@ -80,29 +129,34 @@
     const container = document.getElementById('portfolio-items');
     if (!container) return;
     container.innerHTML = '';
-    items.forEach(item => {
+    items.forEach((item, index) => {
       const col = document.createElement('div');
       col.className = `col-lg-4 col-md-6 portfolio-item ${item.type || ''}`;
       const detailLink = computeDetailLink(item);
+      // Le prime tre card sono sopra la piega: restano eager per non ritardare
+      // il primo render. Tutto il resto si carica allo scroll.
+      const lazyAttrs = index < 3 ? 'decoding="async"' : 'loading="lazy" decoding="async"';
       // Render media only if a valid src exists
       let mediaHTML = '';
       if (item && item.img) {
         mediaHTML = item.mediaType === 'video'
-          ? `<video class="img-fluid" autoplay loop muted><source src="${item.img}" type="video/mp4" /></video>`
-          : `<img src="${item.img}" class="img-fluid" alt="${item.title}">`;
+          ? `<video class="img-fluid" loop muted playsinline preload="metadata" data-autoplay-inview><source src="${esc(item.img)}" type="video/mp4" /></video>`
+          : `<img src="${esc(item.img)}" class="img-fluid" alt="${esc(item.title)}" ${lazyAttrs}>`;
       }
       col.innerHTML = `
         <div class="portfolio-wrap">
           ${mediaHTML}
-          <a href="${detailLink}" title="Portfolio Details" class="portfolio-info-link" aria-label="Apri dettagli: ${item.title}">
+          <a href="${detailLink}" title="Portfolio Details" class="portfolio-info-link" aria-label="Apri dettagli: ${esc(item.title)}">
             <div class="portfolio-info">
-              <h4>${item.title}</h4>
+              <h4>${esc(item.title)}</h4>
             </div>
           </a>
         </div>
       `;
       container.appendChild(col);
     });
+
+    wireLazyMedia(container);
 
     // Prova a notificare Isotope (sia subito che onload)
     const notify = () => {
@@ -329,18 +383,38 @@
     const embedUrl = (typeof e === 'string') ? e : (e && e.url);
     const embedLabel = (e && e.label) ? e.label : 'Apri a schermo intero';
 
-    if (embedUrl) {
-      // Ensure section is visible when we have a valid URL
-      section.style.display = '';
-      iframe.src = embedUrl;
-      link.href = embedUrl;
-      label.textContent = embedLabel;
-    } else {
+    if (!embedUrl) {
       // Hide the whole section if no embed provided for this project
       section.style.display = 'none';
       try { iframe.removeAttribute('src'); } catch (_) {}
       link.removeAttribute('href');
+      return;
     }
+
+    // Ensure section is visible when we have a valid URL
+    section.style.display = '';
+    link.href = embedUrl;
+    label.textContent = embedLabel;
+
+    // Il viewer 3D pesa decine di MB: si carica solo se l'utente lo chiede,
+    // invece di partire all'apertura della pagina.
+    const wrap = iframe.closest('.embed-wrap') || iframe.parentElement;
+    if (!wrap || wrap.querySelector('.embed-facade')) return;
+    try { iframe.removeAttribute('src'); } catch (_) {}
+
+    const facade = document.createElement('button');
+    facade.type = 'button';
+    facade.className = 'embed-facade';
+    facade.innerHTML = `
+      <span class="embed-facade-icon"><i class="bi bi-badge-3d"></i></span>
+      <span class="embed-facade-text">Carica anteprima interattiva</span>
+      <span class="embed-facade-hint">Modello 3D pesante: parte solo quando lo apri.</span>
+    `;
+    facade.addEventListener('click', () => {
+      iframe.src = embedUrl;
+      facade.remove();
+    }, { once: true });
+    wrap.appendChild(facade);
   }
 
   function initLightbox() {
@@ -374,12 +448,13 @@
       const col = document.createElement('div');
       const colClass = 'col-lg-4 col-md-6';
       col.className = `${colClass} portfolio-item ${project.type || 'filter-app'}`;
+      const lazyAttrs = index < 3 ? 'decoding="async"' : 'loading="lazy" decoding="async"';
       col.innerHTML = `
         <div class="portfolio-wrap">
-          <img src="${imgUrl}" class="img-fluid" alt="${project.title} ${index + 1}">
-          <a href="${imgUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox portfolio-info-link" aria-label="Apri immagine ${index + 1}">
+          <img src="${esc(imgUrl)}" class="img-fluid" alt="${esc(project.title)} ${index + 1}" ${lazyAttrs}>
+          <a href="${esc(imgUrl)}" data-gallery="portfolioGallery" class="portfolio-lightbox portfolio-info-link" aria-label="Apri immagine ${index + 1}">
             <div class="portfolio-info">
-              <h4>${project.title}</h4>
+              <h4>${esc(project.title)}</h4>
             </div>
           </a>
         </div>
@@ -387,6 +462,7 @@
       galleryContainer.appendChild(col);
     });
 
+    wireLazyMedia(galleryContainer);
     initLightbox();
   }
 
@@ -409,8 +485,8 @@
     section.style.display = '';
 
     mount.innerHTML = `
-      <img class="ba-img ba-before" src="${beforeSrc}" alt="Prima" />
-      <img class="ba-img ba-after" src="${afterSrc}" alt="Dopo" />
+      <img class="ba-img ba-before" src="${esc(beforeSrc)}" alt="Prima" loading="lazy" decoding="async" />
+      <img class="ba-img ba-after" src="${esc(afterSrc)}" alt="Dopo" loading="lazy" decoding="async" />
       <span class="ba-label before">Prima</span>
       <span class="ba-label after">Dopo</span>
       <div class="ba-handle" aria-hidden="true"></div>

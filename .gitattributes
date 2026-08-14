@@ -1,0 +1,22 @@
+# Normalizza i fine riga: LF nel repository, nativi in locale.
+* text=auto eol=lf
+
+# File binari: mai convertiti, mai diffati come testo.
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+*.mp4   binary
+*.webm  binary
+*.mov   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+*.pdf   binary
+
+# Il viewer SuperSplat contiene dati binari incorporati: non trattarlo come testo.
+torreManfriaPulita.html binary
