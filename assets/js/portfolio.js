@@ -480,9 +480,20 @@
       if (!/ - /.test(document.title)) document.title = site.title;
     }
     const social = site.social || {};
+    // Un'icona social che punta a "#" e' un link morto: meglio non mostrarla
+    // affatto. Riappare da sola appena in content.json c'e' un URL vero.
     const setHref = (cls, url) => {
-      if (!url) return;
-      $$("a." + cls).forEach(a => { a.href = url; a.target = '_blank'; });
+      const valido = url && url !== '#';
+      $$('a.' + cls).forEach(a => {
+        if (!valido) {
+          a.style.display = 'none';
+          return;
+        }
+        a.style.display = '';
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+      });
     };
     setHref('facebook', social.facebook);
     setHref('instagram', social.instagram);
