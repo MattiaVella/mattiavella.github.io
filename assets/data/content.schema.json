@@ -1,0 +1,179 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mattiavella.github.io/assets/data/content.schema.json",
+  "title": "Contenuti del portfolio",
+  "description": "Struttura di content.json. Serve all'editor per autocompletamento e segnalazione errori; i controlli veri li fa scripts/validate-content.mjs.",
+  "type": "object",
+  "required": ["site"],
+  "properties": {
+    "site": {
+      "type": "object",
+      "required": ["portfolio"],
+      "properties": {
+        "title": { "type": "string", "description": "Nome mostrato nell'hero e nel footer." },
+        "contact": {
+          "type": "object",
+          "properties": {
+            "location": { "type": "string" },
+            "locationUrl": { "type": "string", "description": "Link alla mappa." },
+            "email": { "type": "string", "format": "email" },
+            "phone": { "type": "string" }
+          }
+        },
+        "social": {
+          "type": "object",
+          "description": "URL completi. Il valore \"#\" significa link non impostato.",
+          "properties": {
+            "facebook": { "type": "string" },
+            "instagram": { "type": "string" },
+            "linkedin": { "type": "string" }
+          }
+        },
+        "portfolio": {
+          "type": "object",
+          "required": ["items"],
+          "properties": {
+            "filters": {
+              "type": "array",
+              "description": "Bottoni di filtro. Il campo filter va nella forma \".filter-<categoria>\".",
+              "items": {
+                "type": "object",
+                "required": ["label", "filter"],
+                "properties": {
+                  "label": { "type": "string" },
+                  "filter": { "type": "string", "pattern": "^(\\*|\\.filter-[a-z0-9-]+)$" }
+                }
+              }
+            },
+            "items": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/project" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "asset": {
+      "type": "string",
+      "description": "Percorso relativo alla radice del sito, con barre normali. Mai backslash: su GitHub Pages danno 404.",
+      "pattern": "^[^\\\\]+$"
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": {
+          "description": "Identificativo univoco, usato nei link PortfolioPost.html?id=...",
+          "type": ["integer", "string"]
+        },
+        "category": {
+          "type": "string",
+          "description": "Senza il prefisso filter-. Deve corrispondere a un filtro dichiarato.",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "contentType": { "type": "string", "enum": ["Work", "Post", "Video"] },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "description": { "type": "string", "description": "Testo breve." },
+        "longDescription": { "type": "string" },
+        "details": { "type": "string", "description": "Paragrafo lungo nella pagina di dettaglio." },
+        "media": {
+          "type": "object",
+          "description": "Immagine o video di copertina.",
+          "required": ["src"],
+          "properties": {
+            "type": { "type": "string", "enum": ["image", "video"], "default": "image" },
+            "src": { "$ref": "#/definitions/asset" }
+          }
+        },
+        "gallery": {
+          "type": "array",
+          "description": "Immagini mostrate nella galleria, apribili nel lightbox.",
+          "items": { "$ref": "#/definitions/asset" }
+        },
+        "beforeAfter": {
+          "type": "object",
+          "description": "Attiva lo slider di confronto. Va omesso se non serve.",
+          "required": ["before", "after"],
+          "properties": {
+            "before": { "$ref": "#/definitions/asset" },
+            "after": { "$ref": "#/definitions/asset" }
+          }
+        },
+        "embed": {
+          "description": "Anteprima interattiva in iframe (es. viewer 3D). Si carica solo al click.",
+          "oneOf": [
+            { "$ref": "#/definitions/asset" },
+            {
+              "type": "object",
+              "required": ["url"],
+              "properties": {
+                "url": { "$ref": "#/definitions/asset" },
+                "label": { "type": "string" }
+              }
+            }
+          ]
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "client": { "type": "string" },
+            "date": { "type": "string", "description": "Usato anche per ordinare i case study, dal piu' recente." },
+            "role": { "type": "string" },
+            "tags": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["url"],
+            "properties": {
+              "label": { "type": "string" },
+              "url": { "type": "string" },
+              "icon": { "type": "string", "description": "Classe Bootstrap Icons, es. bi-github." }
+            }
+          }
+        },
+        "collaborators": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "role": { "type": "string" },
+              "url": { "type": "string" }
+            }
+          }
+        },
+        "caseStudy": {
+          "type": "object",
+          "description": "Se presente, il progetto compare in case-studies.html.",
+          "properties": {
+            "overview": { "type": "string" },
+            "heroQuote": { "type": "string" },
+            "goals": { "type": "array", "items": { "type": "string" } },
+            "challenges": { "type": "array", "items": { "type": "string" } },
+            "solution": { "type": "array", "items": { "type": "string" } },
+            "tools": { "type": "array", "items": { "type": "string" } },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["label", "value"],
+                "properties": {
+                  "label": { "type": "string" },
+                  "value": { "type": "string" },
+                  "caption": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

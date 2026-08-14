@@ -1,0 +1,75 @@
+// Esempio di progetto da copiare dentro site.portfolio.items di content.json.
+//
+// Questo file e' solo un riferimento da leggere: content.json e' JSON puro e
+// NON accetta commenti, quindi copia il blocco togliendo le righe con //.
+//
+// Obbligatori: id, title. Tutto il resto e' opzionale e, se manca, la sezione
+// corrispondente semplicemente non viene mostrata.
+{
+  // Univoco tra tutti i progetti: finisce nei link PortfolioPost.html?id=3
+  "id": 3,
+
+  // Senza il prefisso "filter-". Deve esistere tra site.portfolio.filters,
+  // altrimenti il progetto non risponde a nessun bottone di filtro.
+  "category": "render",
+
+  "title": "Nome del progetto",
+  "subtitle": "Product Render",
+
+  // Copertina nella griglia del portfolio.
+  // Percorsi con barre normali, mai backslash. Usa i .webp generati da
+  // "npm run optimize:images", non i JPG originali.
+  "media": { "type": "image", "src": "assets/img/progetto3.webp" },
+
+  "description": "Riga breve mostrata sotto il titolo.",
+  "details": "Paragrafo lungo nella pagina di dettaglio.",
+
+  // Galleria con lightbox. Le prime immagini sono eager, le altre lazy.
+  "gallery": [
+    "assets/img/progetto3-1.webp",
+    "assets/img/progetto3-2.webp"
+  ],
+
+  // Slider di confronto. Ometti del tutto la chiave se non ti serve:
+  // se la lasci incompleta la sezione resta nascosta.
+  "beforeAfter": {
+    "before": "assets/img/progetto3-prima.webp",
+    "after": "assets/img/progetto3-dopo.webp"
+  },
+
+  // Anteprima interattiva in iframe (es. viewer SuperSplat).
+  // Si carica solo quando il visitatore clicca, non all'apertura della pagina.
+  "embed": {
+    "url": "progetto3-viewer.html",
+    "label": "Apri a schermo intero"
+  },
+
+  "meta": {
+    "client": "Nome cliente",
+    "date": "2026", // ordina i case study, dal piu' recente
+    "role": "3D Artist",
+    "tags": ["Render", "Blender"] // il primo tag fa da etichetta in alto
+  },
+
+  "links": [
+    { "label": "ArtStation", "url": "https://www.artstation.com/...", "icon": "bi-link-45deg" }
+  ],
+
+  "collaborators": [
+    { "name": "Nome Cognome", "role": "Concept Artist", "url": "https://instagram.com/..." }
+  ],
+
+  // Se presente, il progetto compare anche in case-studies.html.
+  // Ometti l'intero blocco per un progetto senza case study.
+  "caseStudy": {
+    "overview": "Una o due righe sul contesto e l'obiettivo.",
+    "heroQuote": "Frase che sintetizza l'approccio.",
+    "goals": ["Obiettivo 1", "Obiettivo 2"],
+    "challenges": ["Difficolta' incontrata"],
+    "solution": ["Come l'hai risolta"],
+    "tools": ["Blender", "Substance 3D Painter"],
+    "results": [
+      { "label": "Tempo Render", "value": "-35%", "caption": "vs baseline" }
+    ]
+  }
+}

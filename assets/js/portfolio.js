@@ -6,70 +6,8 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Evita che virgolette o < nei testi di content.json rompano l'HTML generato.
-  const esc = (s) => String(s == null ? '' : s)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-
-  // Isotope posiziona gli item misurandone l'altezza: con le immagini lazy
-  // l'altezza è 0 al primo layout, quindi va ricalcolato a ogni load.
-  function relayoutIsotope() {
-    try {
-      if (window._portfolioIsotope) window._portfolioIsotope.layout();
-    } catch (_) {}
-  }
-
-  function wireLazyMedia(container) {
-    if (!container) return;
-
-    $$('img', container).forEach(img => {
-      if (img.complete) return;
-      img.addEventListener('load', relayoutIsotope, { once: true });
-      img.addEventListener('error', relayoutIsotope, { once: true });
-    });
-
-    // I video partono solo quando entrano nel viewport: evita di scaricare
-    // decine di MB per clip che l'utente potrebbe non vedere mai.
-    const videos = $$('video[data-autoplay-inview]', container);
-    if (!videos.length) return;
-
-    if (!('IntersectionObserver' in window)) {
-      videos.forEach(v => { try { v.play().catch(() => {}); } catch (_) {} });
-      return;
-    }
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const v = entry.target;
-        if (entry.isIntersecting) {
-          try { const p = v.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {}
-        } else {
-          try { v.pause(); } catch (_) {}
-        }
-      });
-    }, { rootMargin: '200px 0px' });
-
-    videos.forEach(v => {
-      v.addEventListener('loadeddata', relayoutIsotope, { once: true });
-      io.observe(v);
-    });
-  }
-
-  async function loadContent() {
-    if (window.__contentJSON) return window.__contentJSON;
-    try {
-      const res = await fetch('assets/data/content.json', { cache: 'no-cache' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const json = await res.json();
-      window.__contentJSON = json;
-      return json;
-    } catch (err) {
-      console.error('[portfolio] Impossibile caricare content.json:', err);
-      const fallback = { site: { portfolio: { filters: [{ label: 'All', filter: '*' }], items: [] }, title: 'Portfolio' } };
-      window.__contentJSON = fallback;
-      return fallback;
-    }
-  }
+  // Helper condivisi con case-studies.js (assets/js/site-content.js).
+  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs } = window.SiteContent;
 
   function normalizeItems(items) {
     return (items || []).map(it => {
@@ -133,15 +71,12 @@
       const col = document.createElement('div');
       col.className = `col-lg-4 col-md-6 portfolio-item ${item.type || ''}`;
       const detailLink = computeDetailLink(item);
-      // Le prime tre card sono sopra la piega: restano eager per non ritardare
-      // il primo render. Tutto il resto si carica allo scroll.
-      const lazyAttrs = index < 3 ? 'decoding="async"' : 'loading="lazy" decoding="async"';
       // Render media only if a valid src exists
       let mediaHTML = '';
       if (item && item.img) {
         mediaHTML = item.mediaType === 'video'
           ? `<video class="img-fluid" loop muted playsinline preload="metadata" data-autoplay-inview><source src="${esc(item.img)}" type="video/mp4" /></video>`
-          : `<img src="${esc(item.img)}" class="img-fluid" alt="${esc(item.title)}" ${lazyAttrs}>`;
+          : `<img src="${esc(item.img)}" class="img-fluid" alt="${esc(item.title)}" ${lazyAttrs(index)}>`;
       }
       col.innerHTML = `
         <div class="portfolio-wrap">
@@ -396,25 +331,7 @@
     link.href = embedUrl;
     label.textContent = embedLabel;
 
-    // Il viewer 3D pesa decine di MB: si carica solo se l'utente lo chiede,
-    // invece di partire all'apertura della pagina.
-    const wrap = iframe.closest('.embed-wrap') || iframe.parentElement;
-    if (!wrap || wrap.querySelector('.embed-facade')) return;
-    try { iframe.removeAttribute('src'); } catch (_) {}
-
-    const facade = document.createElement('button');
-    facade.type = 'button';
-    facade.className = 'embed-facade';
-    facade.innerHTML = `
-      <span class="embed-facade-icon"><i class="bi bi-badge-3d"></i></span>
-      <span class="embed-facade-text">Carica anteprima interattiva</span>
-      <span class="embed-facade-hint">Modello 3D pesante: parte solo quando lo apri.</span>
-    `;
-    facade.addEventListener('click', () => {
-      iframe.src = embedUrl;
-      facade.remove();
-    }, { once: true });
-    wrap.appendChild(facade);
+    mountEmbedFacade(iframe, embedUrl);
   }
 
   function initLightbox() {
@@ -448,10 +365,9 @@
       const col = document.createElement('div');
       const colClass = 'col-lg-4 col-md-6';
       col.className = `${colClass} portfolio-item ${project.type || 'filter-app'}`;
-      const lazyAttrs = index < 3 ? 'decoding="async"' : 'loading="lazy" decoding="async"';
       col.innerHTML = `
         <div class="portfolio-wrap">
-          <img src="${esc(imgUrl)}" class="img-fluid" alt="${esc(project.title)} ${index + 1}" ${lazyAttrs}>
+          <img src="${esc(imgUrl)}" class="img-fluid" alt="${esc(project.title)} ${index + 1}" ${lazyAttrs(index)}>
           <a href="${esc(imgUrl)}" data-gallery="portfolioGallery" class="portfolio-lightbox portfolio-info-link" aria-label="Apri immagine ${index + 1}">
             <div class="portfolio-info">
               <h4>${esc(project.title)}</h4>

@@ -21,6 +21,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE_DIRS = ['assets/img', 'assets/images'];
 const EXTENSIONS = new Set(['.jpg', '.jpeg', '.png']);
 
+// Le favicon restano PNG: sono di pochi KB e il PNG e' il formato che ogni
+// browser e ogni dispositivo accetta senza discutere.
+const SKIP = new Set(['favicon.png', 'apple-touch-icon.png']);
+
 // Oltre questa larghezza l'immagine viene ridimensionata: nessuno schermo
 // mostra un thumbnail di portfolio a 6000px.
 const MAX_WIDTH = 1920;
@@ -64,7 +68,7 @@ async function* walk(dir) {
   for (const entry of entries) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) yield* walk(full);
-    else if (EXTENSIONS.has(extname(entry.name).toLowerCase())) yield full;
+    else if (EXTENSIONS.has(extname(entry.name).toLowerCase()) && !SKIP.has(entry.name.toLowerCase())) yield full;
   }
 }
 

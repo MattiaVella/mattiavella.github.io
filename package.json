@@ -6,7 +6,10 @@
   "type": "module",
   "scripts": {
     "optimize:images": "node scripts/optimize-images.mjs",
-    "optimize:images:force": "node scripts/optimize-images.mjs --force"
+    "optimize:images:force": "node scripts/optimize-images.mjs --force",
+    "validate:content": "node scripts/validate-content.mjs",
+    "check": "npm run validate:content",
+    "setup:hooks": "git config core.hooksPath .githooks"
   },
   "engines": {
     "node": ">=18"

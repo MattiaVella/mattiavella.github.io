@@ -1,0 +1,40 @@
+#!/bin/sh
+# Controlla content.json prima di ogni commit che lo tocca.
+#
+# Attivalo una volta con:  npm run setup:hooks
+# (imposta core.hooksPath su questa cartella, quindi l'hook e' versionato e non
+# serve installare husky ne' alcun pacchetto npm)
+#
+# Per saltarlo in un caso specifico:  git commit --no-verify
+
+if ! git diff --cached --name-only | grep -q '^assets/data/content\.json$'; then
+  exit 0
+fi
+
+# Git bash puo' avere un PATH piu' vecchio dell'installazione di Node, quindi
+# oltre al PATH si controllano le posizioni standard su Windows.
+NODE=""
+if command -v node >/dev/null 2>&1; then
+  NODE="node"
+else
+  for candidate in \
+    "/c/Program Files/nodejs/node.exe" \
+    "/c/Program Files (x86)/nodejs/node.exe" \
+    "$LOCALAPPDATA/Programs/nodejs/node.exe"
+  do
+    if [ -x "$candidate" ]; then NODE="$candidate"; break; fi
+  done
+fi
+
+if [ -z "$NODE" ]; then
+  echo "pre-commit: node non trovato, salto la validazione di content.json"
+  echo "            (installalo o riavvia il terminale per abilitare il controllo)"
+  exit 0
+fi
+
+echo "pre-commit: valido assets/data/content.json"
+if ! "$NODE" scripts/validate-content.mjs; then
+  echo ""
+  echo "Commit annullato: correggi gli errori sopra, oppure usa --no-verify."
+  exit 1
+fi
