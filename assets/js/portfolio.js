@@ -525,6 +525,25 @@
       phoneLink.href = 'tel:' + tel;
       phoneLink.setAttribute('aria-label', 'Chiama ' + contact.phone);
     }
+
+    // Un contatto assente da content.json sparisce dalla pagina, invece di
+    // lasciare in vista il segnaposto scritto nell'HTML.
+    let nascosti = 0;
+    [[locLink, contact.location], [emailLink, contact.email], [phoneLink, contact.phone]]
+      .forEach(([link, valore]) => {
+        if (!link) return;
+        const box = link.closest('[class*="col-"]') || link;
+        if (valore) {
+          box.style.display = '';
+        } else {
+          box.style.display = 'none';
+          nascosti++;
+        }
+      });
+
+    // Con meno di tre voci la riga resterebbe sbilanciata a sinistra.
+    const riga = $('.contact-items');
+    if (riga) riga.classList.toggle('justify-content-center', nascosti > 0);
   }
 
   (async function init() {

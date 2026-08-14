@@ -140,8 +140,10 @@ async function main() {
   if (!contact.email || /example\.com$/i.test(contact.email)) {
     warn('site.contact.email', `ancora un segnaposto ("${contact.email || 'vuoto'}")`);
   }
-  if (!contact.phone || /^\+39\s*0+$/.test(String(contact.phone).replace(/\s/g, ''))) {
-    warn('site.contact.phone', `ancora un segnaposto ("${contact.phone || 'vuoto'}")`);
+  // Il telefono e' facoltativo: assente vuol dire che il blocco non viene
+  // mostrato, quindi si segnala solo se c'e' ma e' finto.
+  if (contact.phone && /^\+?39?0+$/.test(String(contact.phone).replace(/[\s\-().]/g, ''))) {
+    warn('site.contact.phone', `ancora un segnaposto ("${contact.phone}")`);
   }
   Object.entries(site.social || {}).forEach(([rete, url]) => {
     if (!url || url === '#') warn(`site.social.${rete}`, 'link non impostato (punta a "#")');
