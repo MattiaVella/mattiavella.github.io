@@ -272,9 +272,9 @@ h1, h2, h3, h4, h5, h6 {
 
   background-repeat: no-repeat;
   background-size: cover;
-  /* Sfondo scuro di base: il testo bianco resta leggibile anche prima che il
-     video sia caricato (o se non viene caricato affatto). */
-  background-color: #181818;
+  /* Niente background-color qui: #myVideo ha z-index -1 e viene dipinto nel
+     contesto di impilamento radice, quindi uno sfondo su #hero lo coprirebbe.
+     Il fondo scuro lo mette gia' body. */
 }
 @media (min-width: 992px) {
   #hero {

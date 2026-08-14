@@ -308,7 +308,15 @@
   video.load();
 
   if (!reduceMotion) {
-    const played = video.play();
-    if (played && typeof played.catch === 'function') played.catch(() => {});
+    // Alcuni browser mobile rifiutano il play finche' il video non ha dati
+    // sufficienti: si riprova a 'canplay', altrimenti resta fermo sul poster.
+    const tryPlay = () => {
+      const played = video.play();
+      if (played && typeof played.catch === 'function') played.catch(() => {});
+    };
+    tryPlay();
+    video.addEventListener('canplay', () => {
+      if (video.paused) tryPlay();
+    }, { once: true });
   }
 })();
