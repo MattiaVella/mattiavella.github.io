@@ -504,21 +504,21 @@
     const aboutTitle = document.getElementById('about-title');
     const aboutText = document.getElementById('about-text');
     const aboutSkills = document.getElementById('about-skills');
-    if (aboutText) {
-      const paragrafi = (about && Array.isArray(about.paragraphs)) ? about.paragraphs.filter(Boolean) : [];
-      const competenze = (about && Array.isArray(about.skills)) ? about.skills.filter(Boolean) : [];
+    // La bio e' scritta anche nell'HTML, cosi' i crawler e le anteprime dei
+    // link la leggono senza eseguire JavaScript. Qui la si sovrascrive solo se
+    // content.json la definisce: senza "about" resta quella statica.
+    if (aboutText && about) {
+      const paragrafi = Array.isArray(about.paragraphs) ? about.paragraphs.filter(Boolean) : [];
+      const competenze = Array.isArray(about.skills) ? about.skills.filter(Boolean) : [];
 
-      if (aboutTitle && about && about.title) aboutTitle.textContent = about.title;
-      aboutText.innerHTML = paragrafi.map(p => `<p>${esc(p)}</p>`).join('');
+      if (aboutTitle && about.title) aboutTitle.textContent = about.title;
+      if (paragrafi.length) {
+        aboutText.innerHTML = paragrafi.map(p => `<p>${esc(p)}</p>`).join('');
+      }
       if (aboutSkills) {
         aboutSkills.innerHTML = competenze.map(s => `<li>${esc(s)}</li>`).join('');
         aboutSkills.style.display = competenze.length ? '' : 'none';
       }
-
-      // Senza testo la colonna resterebbe una card vuota accanto ai contatti.
-      const card = aboutText.closest('.about-card');
-      const colonna = card ? card.closest('[class*="col-"]') : null;
-      if (colonna) colonna.style.display = paragrafi.length ? '' : 'none';
     }
 
     // Contatti dinamici

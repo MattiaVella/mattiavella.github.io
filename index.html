@@ -9,6 +9,24 @@
   <meta content="Mattia Vella, videomaker e 3D artist a Torino. Video per aziende, contenuti generati con AI, render 3D ed esperienze 3D interattive." name="description">
   <meta content="videomaker, video aziendali, contenuti AI, render 3d, gaussian splatting, 3d interattivo, Torino" name="keywords">
 
+  <link rel="canonical" href="https://mattiavella.github.io/">
+
+  <!-- Anteprime di condivisione (LinkedIn, WhatsApp, Telegram, X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mattia Vella">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://mattiavella.github.io/">
+  <meta property="og:title" content="Mattia Vella - Videomaker e 3D Artist">
+  <meta property="og:description" content="Video per aziende, contenuti generati con AI, render 3D ed esperienze 3D interattive. Torino.">
+  <meta property="og:image" content="https://mattiavella.github.io/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mattia Vella, videomaker e 3D artist">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mattia Vella - Videomaker e 3D Artist">
+  <meta name="twitter:description" content="Video per aziende, contenuti generati con AI, render 3D ed esperienze 3D interattive. Torino.">
+  <meta name="twitter:image" content="https://mattiavella.github.io/assets/img/og-image.jpg">
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -28,6 +46,64 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- Dati strutturati: dicono ai motori chi sei e cosa offri, senza doverlo
+       dedurre dal testo. Da aggiornare se cambiano contatti o competenze. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://mattiavella.github.io/#mattia-vella",
+        "name": "Mattia Vella",
+        "url": "https://mattiavella.github.io/",
+        "image": "https://mattiavella.github.io/assets/img/og-image.jpg",
+        "jobTitle": "Videomaker e 3D artist",
+        "email": "mailto:mattiavella14@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Torino",
+          "addressCountry": "IT"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Politecnico di Torino"
+        },
+        "knowsAbout": [
+          "Video aziendale",
+          "Montaggio video",
+          "Contenuti video generati con AI",
+          "Gaussian splatting",
+          "Modellazione 3D",
+          "Render 3D",
+          "Esperienze immersive"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/mattia-vella/",
+          "https://www.instagram.com/mattia_vella/"
+        ]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://mattiavella.github.io/#studio",
+        "name": "Mattia Vella - Videomaker e 3D Artist",
+        "url": "https://mattiavella.github.io/",
+        "image": "https://mattiavella.github.io/assets/img/og-image.jpg",
+        "description": "Video per aziende, contenuti generati con AI, render 3D ed esperienze 3D interattive.",
+        "founder": { "@id": "https://mattiavella.github.io/#mattia-vella" },
+        "vatID": "IT02114180850",
+        "email": "mailto:mattiavella14@gmail.com",
+        "areaServed": "IT",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Torino",
+          "addressCountry": "IT"
+        }
+      }
+    ]
+  }
+  </script>
 
 </head>
 
@@ -129,11 +205,17 @@
 
       <div class="row g-4 justify-content-center align-items-stretch">
 
-        <!-- Bio: testo e competenze arrivano da site.about in content.json -->
+        <!-- Bio scritta qui perché i crawler e le anteprime dei link la leggano
+             senza eseguire JavaScript. site.about in content.json la sovrascrive:
+             se la modifichi lì, aggiorna anche questo testo. -->
         <div class="col-12 col-lg-7" data-aos="fade-up" data-aos-delay="100">
           <div class="about-card h-100">
             <h3 id="about-title" class="about-title">Chi sono</h3>
-            <div id="about-text" class="about-text"></div>
+            <div id="about-text" class="about-text">
+              <p>Videomaker e 3D artist, con base a Torino. Lavoro come freelance soprattutto con aziende: contenuti social, video promozionali e istituzionali, seguiti dalla ripresa al montaggio.</p>
+              <p>Ho una laurea magistrale in Ingegneria del Cinema e dei Mezzi di Comunicazione al Politecnico di Torino, un percorso in cui la parte tecnica e quella creativa vanno di pari passo. Da lì arriva anche il lavoro su cortometraggi, esperienze transmediali, videogiochi ed esperienze immersive a 360 gradi, spesso su progetti articolati.</p>
+              <p>Da quel percorso sulle tecnologie immersive nasce naturalmente il lavoro sul gaussian splatting, una tecnica di scansione che trasforma oggetti e luoghi reali in modelli esplorabili in modo interattivo, con applicazioni che vanno dagli allestimenti museali alla presentazione di prodotto. Accanto a questo mi occupo di contenuti video generati con AI, modellazione e render 3D.</p>
+            </div>
             <ul id="about-skills" class="about-skills"></ul>
           </div>
         </div>

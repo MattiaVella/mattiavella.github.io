@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Il viewer 3D pesa decine di MB e non ha contenuto testuale utile:
+# non ha senso farlo scaricare ai crawler.
+Disallow: /torreManfriaPulita.html
+
+Sitemap: https://mattiavella.github.io/sitemap.xml

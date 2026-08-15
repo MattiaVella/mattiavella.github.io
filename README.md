@@ -160,6 +160,7 @@ progetti video finirebbero su una pagina di segnaposto rotti.
 ```bash
 npm run optimize:images    # genera i .webp mancanti (serve ffmpeg)
 npm run validate:content   # controlla content.json prima di pubblicare
+npm run build:sitemap      # rigenera sitemap.xml dai progetti in content.json
 npm run setup:hooks        # attiva l'hook pre-commit (una volta sola)
 ```
 
@@ -214,6 +215,16 @@ eseguito. È così che l'anno nel footer è rimasto vuoto a lungo.
 **Immagini lazy dentro Isotope.** Isotope calcola le posizioni misurando le
 altezze: se le immagini non sono ancora caricate misura 0 e la griglia si
 sovrappone. Per questo `site-content.js` rilancia il layout a ogni `load`.
+
+**La bio esiste in due posti.** Il testo è scritto sia in `index.html` sia in
+`site.about` dentro `content.json`. Non è una svista: nell'HTML serve perché i
+crawler e le anteprime dei link lo leggano senza eseguire JavaScript, nel JSON
+perché resti modificabile dai contenuti. Il JSON vince a runtime, quindi
+**modificando solo il JSON il sito appare giusto ma i motori continuano a
+leggere il testo vecchio.** Vanno aggiornati entrambi.
+
+Attenzione allo stesso schema per i contatti: lì l'HTML contiene segnaposto, non
+testo vero, e vengono nascosti se il dato manca in `content.json`.
 
 ---
 
