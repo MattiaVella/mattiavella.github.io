@@ -22,23 +22,164 @@
     },
     "portfolio": {
       "filters": [
-        { "label": "All", "filter": "*" },
-        { "label": "Video", "filter": ".filter-video" },
-        { "label": "AI", "filter": ".filter-ai" },
-        { "label": "3D", "filter": ".filter-3d" }
+        {
+          "label": "Tutti",
+          "filter": "*"
+        },
+        {
+          "label": "Video",
+          "filter": ".filter-video"
+        },
+        {
+          "label": "AI",
+          "filter": ".filter-ai"
+        },
+        {
+          "label": "Progetti 3D",
+          "filter": ".filter-3d"
+        }
       ],
       "items": [
         {
+          "id": 5,
+          "category": [
+            "3d",
+            "video"
+          ],
+          "contentType": "Video",
+          "media": {
+            "type": "image",
+            "src": "assets/img/pachy-cover.webp"
+          },
+          "title": "Pachy: The Knitted Knight",
+          "subtitle": "MadFat Studios, 2024",
+          "description": "Platform 3D a enigmi in terza persona. Game design, level design, 3D e montaggio del trailer.",
+          "details": "Platform 3D a enigmi in terza persona, ambientato in una casa vista dall'altezza di un giocattolo. Il giocatore controlla un guardiano di pezza che deve recuperare i frammenti della propria gemma e riportare l'ordine nella stanza.",
+          "embed": {
+            "url": "https://www.youtube.com/watch?v=5azmrtgCSrw",
+            "label": "Guarda su YouTube"
+          },
+          "meta": {
+            "client": "MadFat Studios",
+            "date": "2024",
+            "role": "Game Designer, Level Designer, 3D Artist, Montaggio trailer",
+            "tags": [
+              "Game Design",
+              "Level Design",
+              "3D",
+              "Animazione",
+              "Montaggio"
+            ]
+          },
+          "links": [
+            {
+              "label": "Trailer su YouTube",
+              "url": "https://www.youtube.com/watch?v=5azmrtgCSrw",
+              "icon": "bi-youtube"
+            },
+            {
+              "label": "Teaser trailer",
+              "url": "https://www.youtube.com/watch?v=ylR_WRNddAk",
+              "icon": "bi-youtube"
+            }
+          ],
+          "longDescription": "Platform 3D a enigmi in terza persona, ambientato in una casa vista dall'altezza di un giocattolo. Il giocatore controlla un guardiano di pezza che deve recuperare i frammenti della propria gemma e riportare l'ordine nella stanza.",
+          "collaborators": [
+            {
+              "name": "Tommaso Azzarello",
+              "role": "3D Animator/Artist, Visual Artist, UI Designer"
+            },
+            {
+              "name": "Davide Colella",
+              "role": "Producer, Level Designer, 3D Animator/Artist"
+            },
+            {
+              "name": "Alessia Gianolla",
+              "role": "Programmer, Narrative Designer, UI Designer"
+            },
+            {
+              "name": "Federico Gravili",
+              "role": "Programmer, Sound Designer"
+            },
+            {
+              "name": "Alice Intini",
+              "role": "Programmer, Narrative Designer, UI Designer"
+            }
+          ],
+          "gallery": [
+            "assets/img/pachy-1.webp",
+            "assets/img/pachy-2.webp",
+            "assets/img/pachy-3.webp"
+          ]
+        },
+        {
+          "id": 6,
+          "category": "3d",
+          "contentType": "Work",
+          "media": {
+            "type": "image",
+            "src": "assets/img/artemis-cover.webp"
+          },
+          "title": "Artemis",
+          "subtitle": "Politecnico di Torino, 2024",
+          "description": "Esperienza educativa in prima persona dedicata al programma lunare Artemis della NASA.",
+          "longDescription": "Esperienza educativa in prima persona ambientata in una base terrestre della NASA, dedicata al programma lunare Artemis. Il visitatore esplora tre ambienti — sala museale, magazzino e sala di simulazione — fra contenuti interattivi, enigmi e una simulazione di gravità lunare, guidato da un assistente vocale.",
+          "details": "Esperienza educativa in prima persona ambientata in una base terrestre della NASA, dedicata al programma lunare Artemis. Il visitatore esplora tre ambienti — sala museale, magazzino e sala di simulazione — fra contenuti interattivi, enigmi e una simulazione di gravità lunare, guidato da un assistente vocale.",
+          "meta": {
+            "client": "Politecnico di Torino",
+            "date": "2024",
+            "tags": [
+              "Realtà virtuale",
+              "3D",
+              "Game Design"
+            ]
+          },
+          "links": [
+            {
+              "label": "Gioca su itch.io",
+              "url": "https://signorblender.itch.io/artemis",
+              "icon": "bi-box-arrow-up-right"
+            }
+          ],
+          "collaborators": [
+            {
+              "name": "Tommaso Azzarello"
+            },
+            {
+              "name": "Emanuele Bergese"
+            },
+            {
+              "name": "Alessia Gianolla"
+            },
+            {
+              "name": "Federico Gravili"
+            }
+          ],
+          "gallery": [
+            "assets/img/artemis-2.webp",
+            "assets/img/artemis-3.webp",
+            "assets/img/artemis-5.webp",
+            "assets/img/artemis-1.webp"
+          ]
+        },
+        {
           "id": 1,
+          "hidden": true,
           "category": "3d",
           "contentType": "Post",
-          "media": { "type": "image", "src": "assets/img/img1.webp" },
+          "media": {
+            "type": "image",
+            "src": "assets/img/img1.webp"
+          },
           "title": "ESEMPIO PROGETTO",
           "subtitle": "Modellazione 3D",
           "description": "Testo personalizzato About per il progetto 1",
           "longDescription": "Testo personalizzato About per il progetto 1",
           "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at urna euismod, sagittis risus vel, sollicitudin purus. Quisque fringilla, nisl vitae laoreet sagittis, nisl erat efficitur ligula, eget interdum neque nulla id risus. Morbi malesuada purus non diam egestas, ut commodo felis fermentum.",
-          "embed": { "url": "torreManfriaPulita.html", "label": "Apri a schermo intero"},
+          "embed": {
+            "url": "torreManfriaPulita.html",
+            "label": "Apri a schermo intero"
+          },
           "caseStudy": {
             "overview": "Obiettivo: trasformare un concept 2D in un modello 3D di produzione con topologia pulita e materiali fisicamente corretti.",
             "goals": [
@@ -58,11 +199,28 @@
               "Lighting three-point e denoise ottimizzato"
             ],
             "results": [
-              { "label": "Tempo Render", "value": "-35%", "caption": "vs baseline" },
-              { "label": "Poligoni", "value": "120k", "caption": "ottimizzati" },
-              { "label": "Output", "value": "3840×2160", "caption": "4K PNG" }
+              {
+                "label": "Tempo Render",
+                "value": "-35%",
+                "caption": "vs baseline"
+              },
+              {
+                "label": "Poligoni",
+                "value": "120k",
+                "caption": "ottimizzati"
+              },
+              {
+                "label": "Output",
+                "value": "3840×2160",
+                "caption": "4K PNG"
+              }
             ],
-            "tools": ["Blender", "Substance 3D Painter", "Cycles", "Photoshop"],
+            "tools": [
+              "Blender",
+              "Substance 3D Painter",
+              "Cycles",
+              "Photoshop"
+            ],
             "heroQuote": "La qualità nasce dall'intenzione: pulizia, materiali coerenti e luci credibili."
           },
           "beforeAfter": {
@@ -73,15 +231,35 @@
             "client": "Cliente Demo",
             "date": "2025",
             "role": "3D Artist",
-            "tags": ["Modeling", "Blender", "Cycles"]
+            "tags": [
+              "Modeling",
+              "Blender",
+              "Cycles"
+            ]
           },
           "links": [
-            { "label": "Behance", "url": "https://www.behance.net/", "icon": "bi-box-arrow-up-right" },
-            { "label": "Repository", "url": "https://github.com/", "icon": "bi-github" }
+            {
+              "label": "Behance",
+              "url": "https://www.behance.net/",
+              "icon": "bi-box-arrow-up-right"
+            },
+            {
+              "label": "Repository",
+              "url": "https://github.com/",
+              "icon": "bi-github"
+            }
           ],
           "collaborators": [
-            { "name": "Nome Collaboratore", "role": "Concept Artist", "url": "https://instagram.com/" },
-            { "name": "Nome Collaboratore 2", "role": "3D Modeler", "url": "https://instagram.com/" }
+            {
+              "name": "Nome Collaboratore",
+              "role": "Concept Artist",
+              "url": "https://instagram.com/"
+            },
+            {
+              "name": "Nome Collaboratore 2",
+              "role": "3D Modeler",
+              "url": "https://instagram.com/"
+            }
           ],
           "gallery": [
             "assets/img/img1-1.webp",
@@ -91,9 +269,13 @@
         },
         {
           "id": 2,
+          "hidden": true,
           "category": "3d",
           "contentType": "Work",
-          "media": { "type": "image", "src": "assets/img/img2.webp" },
+          "media": {
+            "type": "image",
+            "src": "assets/img/img2.webp"
+          },
           "title": "Archiviz Example",
           "subtitle": "Visualizzazione Architettonica",
           "description": "Testo personalizzato About per il progetto 2",
@@ -117,24 +299,52 @@
               "Color grading leggero in post"
             ],
             "results": [
-              { "label": "Views", "value": "3", "caption": "final render" },
-              { "label": "Delivery", "value": "48h", "caption": "consegna" },
-              { "label": "Revisioni", "value": "1", "caption": "ciclo" }
+              {
+                "label": "Views",
+                "value": "3",
+                "caption": "final render"
+              },
+              {
+                "label": "Delivery",
+                "value": "48h",
+                "caption": "consegna"
+              },
+              {
+                "label": "Revisioni",
+                "value": "1",
+                "caption": "ciclo"
+              }
             ],
-            "tools": ["Blender", "Cycles", "HDRI Haven", "Photoshop"],
+            "tools": [
+              "Blender",
+              "Cycles",
+              "HDRI Haven",
+              "Photoshop"
+            ],
             "heroQuote": "La luce racconta lo spazio: progettare le ombre è metà del lavoro."
           },
           "meta": {
             "client": "Studio XYZ",
             "date": "2024",
             "role": "Render Artist",
-            "tags": ["Archiviz", "Lighting", "Post"]
+            "tags": [
+              "Archiviz",
+              "Lighting",
+              "Post"
+            ]
           },
           "links": [
-            { "label": "ArtStation", "url": "https://www.artstation.com/", "icon": "bi-link-45deg" }
+            {
+              "label": "ArtStation",
+              "url": "https://www.artstation.com/",
+              "icon": "bi-link-45deg"
+            }
           ],
           "collaborators": [
-            { "name": "Nome Collaboratore 2", "role": "Architect" }
+            {
+              "name": "Nome Collaboratore 2",
+              "role": "Architect"
+            }
           ],
           "gallery": [
             "assets/img/img2-1.webp",
@@ -143,9 +353,13 @@
         },
         {
           "id": 3,
+          "hidden": true,
           "category": "video",
           "contentType": "Video",
-          "media": { "type": "video", "src": "assets/images/render2.mp4" },
+          "media": {
+            "type": "video",
+            "src": "assets/images/render2.mp4"
+          },
           "title": "Progetto video",
           "subtitle": "In arrivo",
           "description": "Spazio riservato al primo lavoro video pubblicabile.",
@@ -153,9 +367,13 @@
         },
         {
           "id": 4,
+          "hidden": true,
           "category": "ai",
           "contentType": "Post",
-          "media": { "type": "image", "src": "assets/img/img2-3.webp" },
+          "media": {
+            "type": "image",
+            "src": "assets/img/img2-3.webp"
+          },
           "title": "Progetto AI",
           "subtitle": "In arrivo",
           "description": "Spazio riservato al primo contenuto generato con AI.",
