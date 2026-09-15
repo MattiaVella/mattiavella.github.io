@@ -1,0 +1,10 @@
+# Configurazione del server locale di anteprima: serve solo in sviluppo.
+.claude/
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Dipendenze npm, se un giorno ne servissero
+node_modules/
