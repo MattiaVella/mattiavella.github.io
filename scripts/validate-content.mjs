@@ -53,18 +53,31 @@ function checkAsset(where, relPath, { required = true } = {}) {
   }
 }
 
+/** Categorie di un progetto, sempre come elenco. */
+function itemCategories(item) {
+  if (Array.isArray(item.category)) return item.category.filter(Boolean);
+  return item.category ? [item.category] : [];
+}
+
 function validateItem(item, index, validCategories) {
-  const where = `progetto #${index + 1}${item && item.title ? ` ("${item.title}")` : ''}`;
+  const where = `progetto #${index + 1}${item && item.title ? ` ("${item.title}")` : ''}${item && item.hidden === true ? ' [nascosto]' : ''}`;
 
   if (item.id == null || item.id === '') {
     err(where, 'manca "id" (serve per i link PortfolioPost.html?id=...)');
   }
   if (!item.title) err(where, 'manca "title"');
 
-  if (!item.category) {
+  // "category" accetta una stringa o un elenco: un progetto puo' rispondere a
+  // piu' filtri contemporaneamente.
+  const categorie = itemCategories(item);
+  if (!categorie.length) {
     warn(where, 'manca "category": il progetto non risponde ai filtri del portfolio');
-  } else if (validCategories.length && !validCategories.includes(item.category)) {
-    err(where, `categoria "${item.category}" non presente tra i filtri (${validCategories.join(', ')})`);
+  } else {
+    categorie.forEach(cat => {
+      if (validCategories.length && !validCategories.includes(cat)) {
+        err(where, `categoria "${cat}" non presente tra i filtri (${validCategories.join(', ')})`);
+      }
+    });
   }
 
   if (!item.media || !item.media.src) {
@@ -191,7 +204,10 @@ async function main() {
 
   // Categorie dichiarate ma ancora senza progetti: il filtro non viene mostrato
   // (portfolio.js nasconde le voci vuote), quindi e' solo un promemoria.
-  const catUsate = validCategories.filter(cat => items.some(it => it && it.category === cat));
+  // I progetti con "hidden": true non compaiono sul sito: per filtri e barra
+  // contano solo quelli visibili.
+  const visibili = items.filter(it => it && it.hidden !== true);
+  const catUsate = validCategories.filter(cat => visibili.some(it => itemCategories(it).includes(cat)));
   validCategories.forEach(cat => {
     if (!catUsate.includes(cat)) {
       warn(`filtro "${cat}"`, 'ancora nessun progetto: la voce resta nascosta finche\' non ne aggiungi uno');
@@ -201,7 +217,10 @@ async function main() {
     warn('filtri', `un'unica categoria in uso ("${catUsate[0]}"): la barra dei filtri resta nascosta`);
   }
 
-  console.log(`Controllati ${items.length} progetti.\n`);
+  const nascosti = items.length - visibili.length;
+  if (!visibili.length) warn('site.portfolio.items', 'tutti i progetti sono nascosti: il portfolio appare vuoto');
+
+  console.log(`Controllati ${items.length} progetti${nascosti ? ` (${nascosti} nascosti)` : ''}.\n`);
 
   if (warnings.length) {
     console.log(`Avvisi (${warnings.length}):`);

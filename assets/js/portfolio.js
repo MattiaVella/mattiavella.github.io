@@ -7,13 +7,24 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   // Helper condivisi con case-studies.js (assets/js/site-content.js).
-  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs } = window.SiteContent;
+  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs, youtubeId } = window.SiteContent;
+
+  /** Categorie di un progetto, sempre come elenco. */
+  function toCategories(it) {
+    if (Array.isArray(it.category)) return it.category.filter(Boolean);
+    if (it.category) return [it.category];
+    if (typeof it.filter === 'string') return [it.filter.replace(/^filter-/, '')];
+    return [];
+  }
 
   function normalizeItems(items) {
     return (items || []).map(it => {
       // Supporto nuove chiavi più chiare mantenendo compatibilità con le vecchie
-      const category = it.category || (typeof it.filter === 'string' ? it.filter.replace(/^filter-/, '') : undefined);
-      const filterClass = category ? `filter-${category}` : it.filter;
+      // "category" accetta una stringa o un elenco: un progetto puo' stare in
+      // piu' filtri (un videogioco di cui hai montato anche il trailer risponde
+      // sia a "3d" sia a "video").
+      const categories = toCategories(it);
+      const filterClass = categories.length ? categories.map(c => `filter-${c}`).join(' ') : it.filter;
       const contentType = it.contentType || it.kind || 'Work';
       const description = it.description || it.about || it.aboutText || '';
       const longDescription = it.longDescription || it.aboutText || it.about || it.description || '';
@@ -23,6 +34,7 @@
 
       return {
         id: it.id,
+        hidden: it.hidden === true,
         type: filterClass, // classe filtro Isotope, es: 'filter-model'
         img: media && media.src ? media.src : '',
         mediaType: media && media.type ? media.type : 'image',
@@ -37,7 +49,8 @@
         links: Array.isArray(it.links) ? it.links : [], // [{label, url, icon?}]
   collaborators: Array.isArray(it.collaborators) ? it.collaborators : [], // [{name, role?, url?}]
   beforeAfter,
-  embed: it.embed || null
+  embed: it.embed || null,
+  caseStudy: it.caseStudy || null
       };
     });
   }
@@ -58,7 +71,10 @@
     const ul = $('#portfolio-flters');
     if (!ul) return;
 
-    const used = new Set((items || []).map(it => it.type).filter(Boolean));
+    // it.type puo' contenere piu' classi separate da spazio.
+    const used = new Set(
+      (items || []).flatMap(it => String(it.type || '').split(/\s+/)).filter(Boolean)
+    );
     const usable = (filters || []).filter(f =>
       f && typeof f.filter === 'string' && f.filter !== '*' &&
       used.has(f.filter.replace(/^\./, ''))
@@ -72,8 +88,11 @@
     }
     ul.style.display = '';
 
+    // L'etichetta del filtro "tutti" arriva da content.json come le altre:
+    // prima era fissa qui e modificarla nel JSON non aveva alcun effetto.
+    const tutti = (filters || []).find(f => f && f.filter === '*');
     const base = document.createElement('li');
-    base.textContent = 'All';
+    base.textContent = (tutti && tutti.label) || 'Tutti';
     base.dataset.filter = '*';
     base.className = 'filter-active';
     ul.appendChild(base);
@@ -267,7 +286,8 @@
     // Links
     // Case Study deep-link
     const csBtn = document.getElementById('case-study-link');
-    if (csBtn && project && project.id != null) {
+    // Senza un caseStudy scritto il bottone porterebbe a un'ancora inesistente.
+    if (csBtn && project && project.id != null && project.caseStudy) {
       csBtn.href = `case-studies.html#cs-${project.id}`;
       csBtn.style.display = '';
     } else if (csBtn) {
@@ -353,6 +373,12 @@
     section.style.display = '';
     link.href = embedUrl;
     label.textContent = embedLabel;
+
+    // Su un video il titolo "Anteprima interattiva" sarebbe fuorviante.
+    const heading = section.querySelector('h3');
+    if (heading && youtubeId(embedUrl)) {
+      heading.innerHTML = '<i class="bi bi-play-btn me-2"></i>Video';
+    }
 
     mountEmbedFacade(iframe, embedUrl);
   }
@@ -576,7 +602,13 @@
     const content = await loadContent();
     applySiteMeta(content?.site);
 
-    const items = normalizeItems(content?.site?.portfolio?.items);
+    const allItems = normalizeItems(content?.site?.portfolio?.items);
+
+    // I progetti con "hidden": true restano nel content.json come template ma
+    // non compaiono in griglia, filtri, case study e sitemap. La pagina di
+    // dettaglio continua a rispondere via URL diretto, cosi' si possono
+    // rivedere prima di pubblicarli.
+    const items = allItems.filter(it => !it.hidden);
 
     // Compat per script inline esistenti
     window.portfolioImages = items.map(item => ({
@@ -597,7 +629,9 @@
   initIsotopeAndFiltersIfNeeded();
 
     // Messaggio utile se non ci sono item (es. fetch bloccato in file://)
-    if ((items || []).length === 0) {
+    // Se il content.json e' stato letto ma tutti i progetti sono nascosti la
+    // griglia resta vuota di proposito: nessun messaggio d'errore.
+    if ((items || []).length === 0 && (allItems || []).length === 0) {
       const container = document.getElementById('portfolio-items');
       if (container) {
         const msg = document.createElement('div');
@@ -613,7 +647,7 @@
     // Dettagli
     const projectId = getProjectId();
     if (projectId) {
-      const project = items.find(p => String(p.id) === String(projectId));
+      const project = allItems.find(p => String(p.id) === String(projectId));
       if (project) {
         populateDetailsBasics(project);
         const paraEl = document.getElementById('dynamic-paragraph') || document.getElementById('portfolio-dynamic-paragraph');

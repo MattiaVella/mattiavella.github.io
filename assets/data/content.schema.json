@@ -86,10 +86,16 @@
           "description": "Identificativo univoco, usato nei link PortfolioPost.html?id=...",
           "type": ["integer", "string"]
         },
+        "hidden": {
+          "type": "boolean",
+          "description": "Se true il progetto resta nel file come template ma non compare in portfolio, case study e sitemap."
+        },
         "category": {
-          "type": "string",
-          "description": "Senza il prefisso filter-. Deve corrispondere a un filtro dichiarato.",
-          "pattern": "^[a-z0-9-]+$"
+          "description": "Senza il prefisso filter-. Deve corrispondere a un filtro dichiarato. Un elenco mette il progetto sotto piu' filtri.",
+          "oneOf": [
+            { "type": "string", "pattern": "^[a-z0-9-]+$" },
+            { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }, "minItems": 1 }
+          ]
         },
         "contentType": { "type": "string", "enum": ["Work", "Post", "Video"] },
         "title": { "type": "string" },

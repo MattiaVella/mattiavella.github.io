@@ -1464,6 +1464,39 @@ spline-viewer {
   opacity: 0.7;
 }
 
+/* Facade di un video: la copertina YouTube fa da sfondo, velata per leggere il testo. */
+/* Niente "position" qui: Bootstrap posiziona i figli di .ratio in absolute e
+   una regola piu' specifica lo annullerebbe, facendo scivolare la facade sotto
+   l'iframe invece di coprirlo. L'overlay ::before si aggancia comunque. */
+.embed-facade-thumb {
+  background-size: cover;
+  background-position: center;
+}
+.embed-facade-thumb > span {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+.embed-facade-thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  transition: background 0.2s ease;
+}
+.embed-facade-thumb:hover::before,
+.embed-facade-thumb:focus-visible::before {
+  background: rgba(0, 0, 0, 0.35);
+}
+.embed-facade-thumb:hover,
+.embed-facade-thumb:focus-visible {
+  background-size: cover;
+  background-position: center;
+}
+.embed-facade-thumb .embed-facade-icon {
+  color: #fff;
+}
+
 /*--------------------------------------------------------------
 # Bio nella sezione contatti (testo da site.about in content.json)
 --------------------------------------------------------------*/

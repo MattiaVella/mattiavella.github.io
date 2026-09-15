@@ -9,7 +9,7 @@
 (function () {
   'use strict';
 
-  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs } = window.SiteContent;
+  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs, youtubeId } = window.SiteContent;
 
   function metaList(meta) {
     if (!meta) return '';
@@ -47,11 +47,16 @@
     const url = (typeof e === 'string') ? e : (e && e.url);
     const label = (e && e.label) ? e.label : 'Apri a schermo intero';
     if (!url) return '';
+    // Su un video il titolo "Anteprima interattiva" sarebbe fuorviante.
+    const video = youtubeId(url);
+    const heading = video
+      ? '<i class="bi bi-play-btn me-1"></i>Video'
+      : '<i class="bi bi-aspect-ratio me-1"></i>Anteprima interattiva';
     return `
       <div class="mt-2">
-        <h4 class="h6 text-uppercase text-secondary"><i class="bi bi-aspect-ratio me-1"></i>Anteprima interattiva</h4>
+        <h4 class="h6 text-uppercase text-secondary">${heading}</h4>
         <div class="embed-wrap ratio ratio-16x9 shadow-lg" style="border-radius:12px; overflow:hidden;">
-          <iframe data-embed-url="${esc(url)}" title="Anteprima interattiva" loading="lazy" referrerpolicy="no-referrer" style="border:0; width:100%; height:100%; background:#0f0f0f;" allowfullscreen></iframe>
+          <iframe data-embed-url="${esc(url)}" title="Anteprima interattiva" loading="lazy" referrerpolicy="no-referrer" allow="autoplay; fullscreen; picture-in-picture" style="border:0; width:100%; height:100%; background:#0f0f0f;" allowfullscreen></iframe>
         </div>
         <div class="text-end mt-2">
           <a href="${esc(url)}" target="_blank" rel="noopener" class="small text-secondary">
@@ -203,9 +208,13 @@
     if (!mount) return;
 
     const data = await loadContent();
-    const items = (data && data.site && data.site.portfolio && data.site.portfolio.items) || [];
+    // Solo i progetti con un "caseStudy" scritto: senza, la scheda ripeterebbe
+    // parola per parola la pagina di dettaglio. Questa pagina e' una selezione
+    // dei progetti raccontati a fondo, non un secondo elenco del portfolio.
+    const items = ((data && data.site && data.site.portfolio && data.site.portfolio.items) || [])
+      .filter(it => it && it.hidden !== true && it.caseStudy);
     if (!items.length) {
-      mount.innerHTML = '<p style="color:#888">Nessun progetto disponibile.</p>';
+      mount.innerHTML = '<p style="color:#888">Nessun case study disponibile al momento.</p>';
       return;
     }
 

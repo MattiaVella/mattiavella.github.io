@@ -72,3 +72,17 @@ Per l'autocompletamento in VS Code, aggiungi in cima a `content.json`:
 ```json
 "$schema": "./content.schema.json",
 ```
+
+## Nascondere un progetto
+
+```json
+"hidden": true
+```
+
+Accanto all'`id`. Il progetto resta nel file come template ma sparisce dalla
+griglia del portfolio, dai filtri, da `case-studies.html` e dalla `sitemap.xml`.
+La pagina di dettaglio continua a rispondere su
+`PortfolioPost.html?id=<id>`, cosi' si puo' rivedere prima di pubblicarla.
+
+Per pubblicarlo basta togliere la riga (o metterla a `false`) e rilanciare
+`npm run build:sitemap`.

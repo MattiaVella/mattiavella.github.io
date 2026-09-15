@@ -93,19 +93,49 @@
 
     try { iframe.removeAttribute('src'); } catch (_) {}
 
+    const video = youtubeId(url);
+    const src = video
+      ? `https://www.youtube-nocookie.com/embed/${video}?autoplay=1&rel=0`
+      : url;
+
     const facade = document.createElement('button');
     facade.type = 'button';
     facade.className = 'embed-facade';
-    facade.innerHTML =
-      '<span class="embed-facade-icon"><i class="bi bi-badge-3d"></i></span>' +
-      '<span class="embed-facade-text">Carica anteprima interattiva</span>' +
-      '<span class="embed-facade-hint">Modello 3D pesante: parte solo quando lo apri.</span>';
+    facade.innerHTML = video
+      ? '<span class="embed-facade-icon"><i class="bi bi-play-circle"></i></span>' +
+        '<span class="embed-facade-text">Guarda il video</span>' +
+        '<span class="embed-facade-hint">Il player YouTube si carica solo quando lo apri.</span>'
+      : '<span class="embed-facade-icon"><i class="bi bi-badge-3d"></i></span>' +
+        '<span class="embed-facade-text">Carica anteprima interattiva</span>' +
+        '<span class="embed-facade-hint">Modello 3D pesante: parte solo quando lo apri.</span>';
+
+    if (video) {
+      // La copertina arriva da YouTube: nessuna immagine da tenere nel repo.
+      facade.style.backgroundImage = `url("https://i.ytimg.com/vi/${video}/hqdefault.jpg")`;
+      facade.classList.add('embed-facade-thumb');
+    }
+
     facade.addEventListener('click', () => {
-      iframe.src = url;
+      // YouTube rifiuta la riproduzione (errore 153) se non riceve il referrer
+      // e non puo' verificare il dominio che incorpora. L'iframe nasce con
+      // "no-referrer" per il viewer 3D: sui video va allentato.
+      if (video) iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.src = src;
       facade.remove();
     }, { once: true });
 
     wrap.appendChild(facade);
+  }
+
+  /**
+   * Estrae l'id da un link YouTube (watch, youtu.be, shorts, embed).
+   * Restituisce null per qualsiasi altro url, cosi' l'embed 3D resta invariato.
+   */
+  function youtubeId(url) {
+    const m = String(url || '').match(
+      /(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+    );
+    return m ? m[1] : null;
   }
 
   /** Attributi di lazy loading: le prime immagini restano eager (sopra la piega). */
@@ -120,6 +150,7 @@
     relayoutIsotope: relayoutIsotope,
     wireLazyMedia: wireLazyMedia,
     mountEmbedFacade: mountEmbedFacade,
+    youtubeId: youtubeId,
     lazyAttrs: lazyAttrs
   };
 })(window);

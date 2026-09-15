@@ -18,9 +18,12 @@ const BASE = 'https://mattiavella.github.io';
 // Pagine fisse. Le due schede di dettaglio non collegate restano fuori:
 // senza un id in query non mostrano alcun contenuto.
 const PAGINE = [
-  { path: '/', priority: '1.0', changefreq: 'monthly' },
-  { path: '/case-studies.html', priority: '0.8', changefreq: 'monthly' }
+  { path: '/', priority: '1.0', changefreq: 'monthly' }
 ];
+
+// case-studies.html resta nel repository ma e' fuori dal menu e dalla sitemap
+// finche' non esiste un progetto con un blocco "caseStudy" scritto.
+const CASE_STUDIES = { path: '/case-studies.html', priority: '0.8', changefreq: 'monthly' };
 
 const oggi = new Date().toISOString().slice(0, 10);
 
@@ -41,9 +44,11 @@ function url({ path, priority, changefreq }) {
 
 async function main() {
   const dati = JSON.parse(await readFile(join(ROOT, 'assets/data/content.json'), 'utf8'));
-  const progetti = dati?.site?.portfolio?.items || [];
+  // I progetti con "hidden": true non sono raggiungibili dal sito: fuori dalla sitemap.
+  const progetti = (dati?.site?.portfolio?.items || []).filter(p => p && p.hidden !== true);
 
   const voci = [...PAGINE];
+  if (progetti.some(p => p && p.caseStudy)) voci.push(CASE_STUDIES);
   progetti.forEach(p => {
     if (p && p.id != null) {
       voci.push({
