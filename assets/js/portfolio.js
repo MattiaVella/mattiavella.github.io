@@ -7,7 +7,7 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   // Helper condivisi con case-studies.js (assets/js/site-content.js).
-  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs, youtubeId } = window.SiteContent;
+  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs, youtubeId, isVideoFile } = window.SiteContent;
 
   /** Categorie di un progetto, sempre come elenco. */
   function toCategories(it) {
@@ -376,11 +376,15 @@
 
     // Su un video il titolo "Anteprima interattiva" sarebbe fuorviante.
     const heading = section.querySelector('h3');
-    if (heading && youtubeId(embedUrl)) {
+    const isVideo = youtubeId(embedUrl) || isVideoFile(embedUrl);
+    if (heading && isVideo) {
       heading.innerHTML = '<i class="bi bi-play-btn me-2"></i>Video';
     }
 
-    mountEmbedFacade(iframe, embedUrl);
+    // Un video locale usa come anteprima "embed.poster" o, in mancanza, la
+    // copertina del progetto (se e' un'immagine).
+    const poster = (e && e.poster) || (project.mediaType === 'image' ? project.img : '');
+    mountEmbedFacade(iframe, embedUrl, poster);
   }
 
   function initLightbox() {

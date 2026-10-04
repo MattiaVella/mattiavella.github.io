@@ -9,7 +9,7 @@
 (function () {
   'use strict';
 
-  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs, youtubeId } = window.SiteContent;
+  const { esc, loadContent, wireLazyMedia, mountEmbedFacade, lazyAttrs, youtubeId, isVideoFile } = window.SiteContent;
 
   function metaList(meta) {
     if (!meta) return '';
@@ -48,7 +48,7 @@
     const label = (e && e.label) ? e.label : 'Apri a schermo intero';
     if (!url) return '';
     // Su un video il titolo "Anteprima interattiva" sarebbe fuorviante.
-    const video = youtubeId(url);
+    const video = youtubeId(url) || isVideoFile(url);
     const heading = video
       ? '<i class="bi bi-play-btn me-1"></i>Video'
       : '<i class="bi bi-aspect-ratio me-1"></i>Anteprima interattiva';

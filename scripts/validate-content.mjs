@@ -103,6 +103,7 @@ function validateItem(item, index, validCategories) {
   if (item.embed) {
     const url = typeof item.embed === 'string' ? item.embed : item.embed.url;
     checkAsset(`${where} > embed.url`, url);
+    if (item.embed.poster) checkAsset(`${where} > embed.poster`, item.embed.poster);
   }
 
   (item.links || []).forEach((l, i) => {

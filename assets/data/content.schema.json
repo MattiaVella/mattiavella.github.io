@@ -59,6 +59,7 @@
                 "required": ["label", "filter"],
                 "properties": {
                   "label": { "type": "string" },
+                "poster": { "$ref": "#/definitions/asset", "description": "Solo video .mp4: immagine prima della riproduzione. Se manca si usa la copertina del progetto." },
                   "filter": { "type": "string", "pattern": "^(\\*|\\.filter-[a-z0-9-]+)$" }
                 }
               }
@@ -127,7 +128,7 @@
           }
         },
         "embed": {
-          "description": "Anteprima interattiva in iframe (es. viewer 3D). Si carica solo al click.",
+          "description": "Contenuto incorporato nella pagina: link YouTube, file video .mp4 del repository, o pagina HTML in iframe (es. viewer 3D).",
           "oneOf": [
             { "$ref": "#/definitions/asset" },
             {

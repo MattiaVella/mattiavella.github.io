@@ -86,12 +86,17 @@
    * Il viewer 3D pesa decine di MB: senza questo parte all'apertura della
    * pagina anche per chi non lo guardera' mai.
    */
-  function mountEmbedFacade(iframe, url) {
+  function mountEmbedFacade(iframe, url, poster) {
     if (!iframe || !url) return;
     const wrap = iframe.closest('.embed-wrap') || iframe.parentElement;
     if (!wrap || wrap.querySelector('.embed-facade')) return;
 
     try { iframe.removeAttribute('src'); } catch (_) {}
+
+    if (isVideoFile(url)) {
+      mountLocalVideo(wrap, iframe, url, poster);
+      return;
+    }
 
     const video = youtubeId(url);
     const src = video
@@ -127,6 +132,33 @@
     wrap.appendChild(facade);
   }
 
+  /** Video ospitato nel repository (es. assets/Video/spot.mp4). */
+  function isVideoFile(url) {
+    return /\.(mp4|webm)(?:[?#].*)?$/i.test(String(url || ''));
+  }
+
+  /**
+   * Al posto dell'iframe mette un <video> nativo. Con preload="metadata" il
+   * browser scarica solo l'intestazione: il resto parte quando si preme play.
+   * Il riquadro prende le proporzioni reali del video, cosi' un formato piu'
+   * largo del 16:9 non mostra bande nere.
+   */
+  function mountLocalVideo(wrap, iframe, url, poster) {
+    const video = document.createElement('video');
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    if (poster) video.poster = poster;
+    video.style.cssText = 'width:100%; height:100%; object-fit:cover; background:#0f0f0f;';
+    video.src = url;
+    video.addEventListener('loadedmetadata', () => {
+      if (video.videoWidth && video.videoHeight) {
+        wrap.style.setProperty('--bs-aspect-ratio', `${(video.videoHeight / video.videoWidth) * 100}%`);
+      }
+    }, { once: true });
+    iframe.replaceWith(video);
+  }
+
   /**
    * Estrae l'id da un link YouTube (watch, youtu.be, shorts, embed).
    * Restituisce null per qualsiasi altro url, cosi' l'embed 3D resta invariato.
@@ -151,6 +183,7 @@
     wireLazyMedia: wireLazyMedia,
     mountEmbedFacade: mountEmbedFacade,
     youtubeId: youtubeId,
+    isVideoFile: isVideoFile,
     lazyAttrs: lazyAttrs
   };
 })(window);

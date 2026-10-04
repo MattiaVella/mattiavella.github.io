@@ -41,6 +41,51 @@
       ],
       "items": [
         {
+          "id": 7,
+          "category": [
+            "ai",
+            "video"
+          ],
+          "contentType": "Video",
+          "media": {
+            "type": "image",
+            "src": "assets/img/aethera-8.webp"
+          },
+          "title": "Aethera – Benvenuti a bordo",
+          "subtitle": "Spec commercial con AI generativa, 2026",
+          "description": "Spec commercial dal tono grottesco per un resort spaziale di lusso. Video interamente generato in locale con ComfyUI.",
+          "longDescription": "Spec commercial di 83 secondi, dal tono grottesco, per un brand immaginario di turismo spaziale di lusso. Video generato interamente in locale con ComfyUI, mantenendo coerente il personaggio principale lungo tutte le inquadrature; voci realizzate con ElevenLabs. Concept, generazione, montaggio e sound design curati in autonomia.",
+          "details": "Spec commercial di 83 secondi, dal tono grottesco, per un brand immaginario di turismo spaziale di lusso. Video generato interamente in locale con ComfyUI, mantenendo coerente il personaggio principale lungo tutte le inquadrature; voci realizzate con ElevenLabs. Concept, generazione, montaggio e sound design curati in autonomia.",
+          "embed": {
+            "url": "assets/Video/aethera-spot.mp4",
+            "poster": "assets/img/aethera-1.webp",
+            "label": "Apri a schermo intero"
+          },
+          "meta": {
+            "client": "Progetto personale",
+            "date": "2026",
+            "role": "Concept, sceneggiatura, generazione video AI, montaggio, sound design",
+            "tags": [
+              "Spec Commercial",
+              "Video AI",
+              "ComfyUI",
+              "ElevenLabs",
+              "Comedy"
+            ]
+          },
+          "gallery": [
+            "assets/img/aethera-1.webp",
+            "assets/img/aethera-2.webp",
+            "assets/img/aethera-3.webp",
+            "assets/img/aethera-4.webp",
+            "assets/img/aethera-5.webp",
+            "assets/img/aethera-6.webp",
+            "assets/img/aethera-7.webp",
+            "assets/img/aethera-8.webp",
+            "assets/img/aethera-9.webp"
+          ]
+        },
+        {
           "id": 5,
           "category": [
             "3d",
