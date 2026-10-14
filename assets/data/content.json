@@ -41,6 +41,104 @@
       ],
       "items": [
         {
+          "id": 8,
+          "category": [
+            "video",
+            "3d"
+          ],
+          "contentType": "Video",
+          "media": {
+            "type": "image",
+            "src": "assets/img/itarts-cover.webp"
+          },
+          "title": "itARTS – Documentari immersivi",
+          "subtitle": "Motion Pixel per il Conservatorio A. Casella, 2025-2026",
+          "description": "Quattro documentari in realtà virtuale (VR180 e 360°) sul progetto PNRR itARTS: Donne all'Opera, Dei Maestri Dipintori e Shared.",
+          "longDescription": "Documentario immersivo in quattro episodi sul progetto itARTS (Italy for Arts: Resources, Time and Space), finanziato dal PNRR e guidato dal Conservatorio \"A. Casella\" dell'Aquila con l'Accademia di Belle Arti dell'Aquila e il Politecnico di Torino. Un video introduttivo e tre episodi raccontano il processo creativo di Donne all'Opera: Croce e Delizia, Dei Maestri Dipintori e Shared, attraverso le voci di chi li ha realizzati.",
+          "details": "Le interviste sono girate in VR180 stereoscopico 8K, gli spazi scenici in video a 360°, e i teatri sono stati ricostruiti in 3D con il gaussian splatting per il menu immersivo che raccoglie i quattro episodi. I documentari sono stati presentati all'evento conclusivo di itARTS all'Aquila il 13 maggio 2026 e fatti provare al pubblico sui visori Meta Quest 3. Il lavoro è anche il tema della mia tesi magistrale al Politecnico di Torino, svolta in azienda presso Motion Pixel.",
+          "embed": {
+            "url": "https://www.youtube.com/watch?v=s3c8oeeEiPE",
+            "label": "Guarda su YouTube"
+          },
+          "meta": {
+            "client": "Motion Pixel per il Conservatorio A. Casella dell'Aquila",
+            "date": "2026",
+            "role": "Riprese immersive, montaggio VR, ricostruzioni 3D, menu immersivo",
+            "tags": [
+              "Documentario immersivo",
+              "Donne all'Opera",
+              "Dei Maestri Dipintori",
+              "Shared",
+              "VR180",
+              "Video 360°",
+              "Gaussian Splatting"
+            ]
+          },
+          "links": [
+            {
+              "label": "itARTS 360° – Episodio introduttivo",
+              "url": "https://www.youtube.com/watch?v=s3c8oeeEiPE",
+              "icon": "bi-youtube"
+            },
+            {
+              "label": "Donne all'Opera 360°",
+              "url": "https://www.youtube.com/watch?v=0mEYWaQOPxo",
+              "icon": "bi-youtube"
+            },
+            {
+              "label": "Dei Maestri Dipintori 360°",
+              "url": "https://www.youtube.com/watch?v=sQwQ6AxIIBI",
+              "icon": "bi-youtube"
+            },
+            {
+              "label": "Shared 360°",
+              "url": "https://www.youtube.com/watch?v=wQSqeqX10q8",
+              "icon": "bi-youtube"
+            },
+            {
+              "label": "Articolo dell'Immersive Media Research Group (Politecnico di Torino)",
+              "url": "https://immersive-media.polito.it/index.php/2026/05/13/il-documentario-immersivo-di-itarts/",
+              "icon": "bi-newspaper"
+            },
+            {
+              "label": "Il progetto sul sito di Motion Pixel",
+              "url": "https://motionpixel.it/portfolio/it-arts-nuove-forme-di-narrazione-immersiva-2/",
+              "icon": "bi-box-arrow-up-right"
+            },
+            {
+              "label": "itARTS all'Immersive Lounge del Torino Film Industry 2025",
+              "url": "https://www.polito.it/ateneo/comunicazione-e-ufficio-stampa/poliflash/esperienze-xr-e-nuovi-linguaggi-il-politecnico-protagonista",
+              "icon": "bi-newspaper"
+            },
+            {
+              "label": "Tesi magistrale \"itARTS³\"",
+              "url": "https://webthesis.biblio.polito.it/41298/",
+              "icon": "bi-journal-text"
+            }
+          ],
+          "collaborators": [
+            {
+              "name": "Stefano Sburlati",
+              "role": "Regia, Motion Pixel",
+              "url": "https://motionpixel.it/"
+            },
+            {
+              "name": "Matteo Pellegrini"
+            },
+            {
+              "name": "Mattia Meloni"
+            }
+          ],
+          "gallery": [
+            "assets/img/itarts-1.webp",
+            "assets/img/itarts-2.webp",
+            "assets/img/itarts-3.webp",
+            "assets/img/itarts-4.webp",
+            "assets/img/itarts-5.webp",
+            "assets/img/itarts-6.webp"
+          ]
+        },
+        {
           "id": 7,
           "category": [
             "ai",
@@ -86,6 +184,156 @@
           ]
         },
         {
+          "id": 9,
+          "category": [
+            "3d",
+            "video"
+          ],
+          "contentType": "Video",
+          "media": {
+            "type": "image",
+            "src": "assets/img/hotwheels-cover.webp"
+          },
+          "title": "Hot Wheels Mega Garage – Spot in 3D",
+          "subtitle": "Politecnico di Torino, 2025",
+          "description": "Spot in computer animation con le piste Hot Wheels, realizzato interamente in 3D per un corso universitario.",
+          "longDescription": "Spot di 30 secondi in computer animation dedicato alle piste Hot Wheels, realizzato interamente in 3D per un corso universitario al Politecnico di Torino. Modellazione, animazione e render di veicoli, piste e ambienti, fino al packshot finale del Mega Garage.",
+          "details": "Spot di 30 secondi in computer animation dedicato alle piste Hot Wheels, realizzato interamente in 3D per un corso universitario al Politecnico di Torino. Modellazione, animazione e render di veicoli, piste e ambienti, fino al packshot finale del Mega Garage.",
+          "meta": {
+            "client": "Progetto universitario, Politecnico di Torino",
+            "date": "2025",
+            "role": "3D Artist",
+            "tags": [
+              "Computer Animation",
+              "3D",
+              "Spot",
+              "Motion"
+            ]
+          },
+          "links": [
+            {
+              "label": "Guarda il video su Instagram",
+              "url": "https://www.instagram.com/aliceintini/reel/DL7aoNpNeAv/",
+              "icon": "bi-instagram"
+            }
+          ],
+          "collaborators": [
+            {
+              "name": "Emanuele Bergese",
+              "role": "3D Artist",
+              "url": "https://www.instagram.com/lelebergese_/"
+            },
+            {
+              "name": "Alice Intini",
+              "role": "3D Artist",
+              "url": "https://www.instagram.com/aliceintini/"
+            },
+            {
+              "name": "@aleways394",
+              "role": "3D Artist",
+              "url": "https://www.instagram.com/aleways394/"
+            }
+          ],
+          "gallery": [
+            "assets/img/hotwheels-cover.webp",
+            "assets/img/hotwheels-1.webp",
+            "assets/img/hotwheels-2.webp",
+            "assets/img/hotwheels-3.webp"
+          ]
+        },
+        {
+          "id": 10,
+          "category": "video",
+          "contentType": "Video",
+          "media": {
+            "type": "image",
+            "src": "assets/img/strati-cover.webp"
+          },
+          "title": "Strati",
+          "subtitle": "Cortometraggio immersivo 360°, 2023",
+          "description": "Cortometraggio di cinema immersivo a 360°, selezionato nell'Immersive Room del Torino Film Industry 2024.",
+          "longDescription": "Cortometraggio di cinema immersivo a 360°, 7 minuti, nato nel corso di Cinema Immersivo del Politecnico di Torino. È stato proiettato in diverse occasioni, tra cui l'Immersive Room della 7ª edizione del Torino Film Industry, al Museo Nazionale del Risorgimento (26-27 novembre 2024).",
+          "details": "Cortometraggio di cinema immersivo a 360°, 7 minuti, nato nel corso di Cinema Immersivo del Politecnico di Torino. È stato proiettato in diverse occasioni, tra cui l'Immersive Room della 7ª edizione del Torino Film Industry, al Museo Nazionale del Risorgimento (26-27 novembre 2024).",
+          "meta": {
+            "client": "Politecnico di Torino, corso di Cinema Immersivo",
+            "date": "2023",
+            "tags": [
+              "Cortometraggio",
+              "Video 360°",
+              "Cinema immersivo",
+              "Torino Film Industry"
+            ]
+          },
+          "links": [
+            {
+              "label": "Strati all'Immersive Room del Torino Film Industry 2024",
+              "url": "https://www.polito.it/ateneo/comunicazione-e-ufficio-stampa/appuntamenti/news?idn=24639",
+              "icon": "bi-newspaper"
+            }
+          ],
+          "collaborators": [
+            {
+              "name": "Silvia De Blasi"
+            },
+            {
+              "name": "Maria Chiara Lucente"
+            },
+            {
+              "name": "Anastasia Dominguez Burzio"
+            },
+            {
+              "name": "Alice Intini"
+            },
+            {
+              "name": "Alessia Gianolla"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "category": "video",
+          "contentType": "Video",
+          "media": {
+            "type": "image",
+            "src": "assets/img/let-eat-be-cover.webp"
+          },
+          "title": "Let Eat Be",
+          "subtitle": "Cortometraggio",
+          "description": "Cortometraggio candidato a diversi festival.",
+          "longDescription": "Cortometraggio candidato a diversi festival.",
+          "details": "Cortometraggio candidato a diversi festival.",
+          "meta": {
+            "tags": [
+              "Cortometraggio",
+              "Festival"
+            ]
+          }
+        },
+        {
+          "id": 12,
+          "category": [
+            "ai",
+            "video"
+          ],
+          "contentType": "Video",
+          "media": {
+            "type": "image",
+            "src": "assets/img/corto-ai-cover.webp"
+          },
+          "title": "Corto sull'AI",
+          "subtitle": "Cortometraggio informativo",
+          "description": "Cortometraggio informativo sull'intelligenza artificiale.",
+          "longDescription": "Cortometraggio informativo sull'intelligenza artificiale.",
+          "details": "Cortometraggio informativo sull'intelligenza artificiale.",
+          "meta": {
+            "tags": [
+              "Cortometraggio",
+              "Divulgazione",
+              "Intelligenza artificiale"
+            ]
+          }
+        },
+        {
           "id": 5,
           "category": [
             "3d",
@@ -97,7 +345,7 @@
             "src": "assets/img/pachy-cover.webp"
           },
           "title": "Pachy: The Knitted Knight",
-          "subtitle": "MadFat Studios, 2024",
+          "subtitle": "Politecnico di Torino, 2024",
           "description": "Platform 3D a enigmi in terza persona. Game design, level design, 3D e montaggio del trailer.",
           "details": "Platform 3D a enigmi in terza persona, ambientato in una casa vista dall'altezza di un giocattolo. Il giocatore controlla un guardiano di pezza che deve recuperare i frammenti della propria gemma e riportare l'ordine nella stanza.",
           "embed": {
@@ -105,7 +353,7 @@
             "label": "Guarda su YouTube"
           },
           "meta": {
-            "client": "MadFat Studios",
+            "client": "Progetto universitario, corso di Game Design (team MadFat Studios)",
             "date": "2024",
             "role": "Game Designer, Level Designer, 3D Artist, Montaggio trailer",
             "tags": [
@@ -126,6 +374,11 @@
               "label": "Teaser trailer",
               "url": "https://www.youtube.com/watch?v=ylR_WRNddAk",
               "icon": "bi-youtube"
+            },
+            {
+              "label": "Il progetto su Behance (Tommaso Azzarello)",
+              "url": "https://www.behance.net/gallery/234362039/Pachy-The-Knitted-Knight",
+              "icon": "bi-box-arrow-up-right"
             }
           ],
           "longDescription": "Platform 3D a enigmi in terza persona, ambientato in una casa vista dall'altezza di un giocattolo. Il giocatore controlla un guardiano di pezza che deve recuperare i frammenti della propria gemma e riportare l'ordine nella stanza.",
@@ -171,7 +424,7 @@
           "longDescription": "Esperienza educativa in prima persona ambientata in una base terrestre della NASA, dedicata al programma lunare Artemis. Il visitatore esplora tre ambienti — sala museale, magazzino e sala di simulazione — fra contenuti interattivi, enigmi e una simulazione di gravità lunare, guidato da un assistente vocale.",
           "details": "Esperienza educativa in prima persona ambientata in una base terrestre della NASA, dedicata al programma lunare Artemis. Il visitatore esplora tre ambienti — sala museale, magazzino e sala di simulazione — fra contenuti interattivi, enigmi e una simulazione di gravità lunare, guidato da un assistente vocale.",
           "meta": {
-            "client": "Politecnico di Torino",
+            "client": "Progetto universitario, corso di Realtà Virtuale 2023/24",
             "date": "2024",
             "tags": [
               "Realtà virtuale",
