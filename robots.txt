@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://mattiavella.github.io/sitemap.xml
